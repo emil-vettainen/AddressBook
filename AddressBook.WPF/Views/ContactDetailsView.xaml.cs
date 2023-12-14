@@ -1,5 +1,4 @@
-﻿using AddressBook.Shared.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,19 +16,13 @@ using System.Windows.Shapes;
 namespace AddressBook.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for ContactListView.xaml
+    /// Interaction logic for ContactDetailsView.xaml
     /// </summary>
-    public partial class ContactListView : UserControl
+    public partial class ContactDetailsView : UserControl
     {
-        public ContactListView()
+        public ContactDetailsView()
         {
             InitializeComponent();
-
-         
-            
         }
-
-        
-
     }
 }

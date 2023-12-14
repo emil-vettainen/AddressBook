@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:models="clr-namespace:AddressBook.Shared.Models;assembly=AddressBook.Shared"
+             xmlns:viewmodel="clr-namespace:AddressBook.MAUI.ViewModels"
+             x:DataType="{x:Type viewmodel:MainViewModel}"
+             
+             x:Class="AddressBook.MAUI.MainPage">
+
+    <ScrollView>
+
+        <Grid RowDefinitions="auto, *" Margin="20">
+
+            <StackLayout Grid.Column="0">
+
+                <Label 
+                      Text="Ange ditt namn:"
+                      Margin="0,0,0,10" />
+
+                <Entry 
+                    Text="{Binding ContactModel.FirstName}"  />
+
+                <Label 
+                    Text="Ange email:"
+                    Margin="0,0,0,10" />
+
+                <Entry 
+                   Text="{Binding ContactModel.Email}"   />
+
+                <Button
+                    Command="{Binding AddContactCommand}"
+                    Text="Add"
+                    Margin="0,20,0,0"
+                    Background="#66B66D" FontSize="Small" />    
+
+
+
+            </StackLayout>
+
+
+            <!--<CollectionView Grid.Row="1" ItemsSource="{Binding ContactList}" Margin="0,30,0,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type models:ContactModel}">
+                        <Grid ColumnDefinitions="*, auto" Margin="0,0,0,15">
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="{Binding FirstName}"/>
+                                <Label Text="{Binding Email}" />
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="1" Text="X" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+            </CollectionView>-->
+
+            <ListView Grid.Row="1" ItemsSource="{Binding ContactList}" Margin="0,30,0,0" >
+                <ListView.ItemTemplate >
+                    <DataTemplate x:DataType="{x:Type models:ContactModel}">
+                        <ViewCell >
+                            <Grid ColumnDefinitions="*, auto" Margin="0,0,0,15" >
+                                <VerticalStackLayout Grid.Column="0" >
+                                    <Label Text="{Binding FirstName}"/>
+                                    <Label Text="{Binding Email}" />
+                                </VerticalStackLayout>
+
+                                <Button Grid.Column="1" Text="X" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+
+
+    </ScrollView>
+    
+
+</ContentPage>

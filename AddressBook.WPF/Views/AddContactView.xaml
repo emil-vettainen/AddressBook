@@ -14,8 +14,13 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel>
-            <Label Content="Lägg till" />
-            <Button Content="Visa lista" Command="{Binding NavigateToContactListCommand}" />
+            <Label Content="AddContactView" />
+            <Button Content="Visa lista" Command="{Binding NavigateToContactListCommand}" Margin="0,20"/>
+            <Label Content="FirstName" />
+            <TextBox Text="{Binding Contact.FirstName}" />
+            <Label Content="Email" />
+            <TextBox Text="{Binding Contact.Email}" />
+            <Button Content="Add" Command="{Binding AddContactCommand}" Margin="0,20"/>
         </StackPanel>
     </Grid>
 </UserControl>

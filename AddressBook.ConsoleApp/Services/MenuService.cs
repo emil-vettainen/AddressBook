@@ -7,7 +7,7 @@ namespace AddressBook.ConsoleApp.Services;
 
 internal class MenuService
 {
-    private readonly IAddressBook _addressBook = new AddressBookService();
+    private readonly AddressBookService _addressBook = new AddressBookService();
 
     public void DisplayMainMenu()
     {

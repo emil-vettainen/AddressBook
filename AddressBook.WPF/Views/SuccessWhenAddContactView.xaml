@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="AddressBook.WPF.Views.ContactListView"
+﻿<UserControl x:Class="AddressBook.WPF.Views.SuccessWhenAddContactView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,24 +7,16 @@
              
              xmlns:viewmodels="clr-namespace:AddressBook.WPF.ViewModels"
              xmlns:models="clr-namespace:AddressBook.Shared.Models;assembly=AddressBook.Shared"
-             
-             d:DataContext="{d:DesignInstance Type=viewmodels:ContactsListViewModel}"
+             d:DataContext="{d:DesignInstance Type=viewmodels:SuccessWhenAddContactViewModel}"
              
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        
         <StackPanel>
-            <Label Content="Contacts list" />
-            <Button Content="Lägg till kontakt" Command="{Binding NavigateToAddContactCommand}" />
-            <ListView ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedContact}">
-                <ListView.ItemTemplate >
-                    <DataTemplate >
-                        <TextBlock Text="{Binding FirstName}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                
-            </ListView>
+            <Label Content="Din kontakt har sparats!" />
+            <Button Content="Lägg till ny" Command="{Binding AddContactCommand}" Margin="0,20"/>
+            <Button Content="Till Menyn" Command="{Binding NavigateToMainMenuCommand}" Margin="0,20"/>
         </StackPanel>
+       
     </Grid>
 </UserControl>
