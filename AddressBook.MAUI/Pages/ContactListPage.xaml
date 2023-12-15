@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AddressBook.MAUI.Pages.ContactListPage"
+             
+             xmlns:models="clr-namespace:AddressBook.Shared.Models;assembly=AddressBook.Shared"
+             xmlns:viewmodels="clr-namespace:AddressBook.MAUI.ViewModels"
+             x:DataType="{x:Type viewmodels:ContactListViewModel}"
+             
+             
+             Title="My Contacts">
+
+
+
+
+
+    <ScrollView>
+
+        <Grid RowDefinitions="auto,*">
+
+            <!--<StackLayout Grid.Column="0" Margin="20,20">
+
+                <Label  Text="Ange ditt namn:" Margin="0,0,0,10" />
+
+                <Entry Text="{Binding ContactModel.FirstName}"  />
+
+                <Label  Text="Ange efternamn:" Margin="0,0,0,10" />
+
+                <Entry  Text="{Binding ContactModel.LastName}"   />
+
+                <Label  Text="Ange email:" Margin="0,0,0,10" />
+
+                <Entry  Text="{Binding ContactModel.Email}"   />
+
+                <Button Command="{Binding AddContactCommand}" Text="Add" Margin="0,20,0,0" Background="#66B66D" FontSize="Small" />
+
+
+            </StackLayout>-->
+
+      
+
+            <CollectionView Grid.Row="1" ItemsSource="{Binding ContactListService.ContactList  } " SelectedItem="{Binding SelectedContact}" SelectionMode="Single" Margin="20,10,20,0">
+
+
+              
+
+
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type models:ContactModel}">
+                        <Grid ColumnDefinitions="*, auto" Padding="20,5">
+
+                            <StackLayout Orientation="Horizontal"  Grid.Column="0" Margin="0,0">
+                                <Label Text="{Binding FirstName}" Padding="0,5,6,0" FontSize="16"/>
+                                <Label Text="{Binding LastName}" Padding="0,5,0,0" FontSize="16"/>
+                                
+                            </StackLayout>
+
+                            <Button FontSize="Small" Grid.Column="1" Text="X" CommandParameter="{Binding .}" Command="{Binding Path=RemoveFromListCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ContactListViewModel}}}" />
+
+                        </Grid>
+
+                        
+                        
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+               
+            </CollectionView>
+
+
+            
+
+
+
+        </Grid>
+        
+        
+    </ScrollView>
+
+    
+</ContentPage>

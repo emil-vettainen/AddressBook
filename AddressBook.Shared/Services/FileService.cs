@@ -1,4 +1,5 @@
 ﻿using AddressBook.Shared.Interfaces;
+using AddressBook.Shared.Models;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
@@ -26,14 +27,14 @@ internal class FileService(string filePath) : IFileService
         return false;
     }
 
-    public bool DeleteContactFromFile(IContact contact)
+    public bool DeleteContactFromFile(ContactModel contact)
     {
         try
         {
             if (File.Exists(_filePath)) 
             {
                 var existingContent = GetContactFromFile();
-                var existingContacts = JsonConvert.DeserializeObject<List<IContact>>(existingContent) ?? new List<IContact>();
+                var existingContacts = JsonConvert.DeserializeObject<List<ContactModel>>(existingContent) ?? new List<ContactModel>();
                 var contactToRemove = existingContacts.FirstOrDefault(x => x.Email == contact.Email);
 
                 if (contactToRemove != null)

@@ -11,10 +11,10 @@ namespace AddressBook.Shared.Services;
 public class AddressBookService 
 {
     private readonly IFileService _fileService = new FileService(@"C:\CSharp\AddressBook\AddressBook.MAUI\ContactList.json");
-    private List<IContact> _contacts = [];
+    private List<ContactModel> _contacts = [];
     IServiceResult result = new ServiceResult();
 
-    public IServiceResult AddContactToList(IContact contactModel)
+    public IServiceResult AddContactToList(ContactModel contactModel)
     {
         try
         {
@@ -41,7 +41,7 @@ public class AddressBookService
         return result;
     }
 
-    public IServiceResult DeleteContactFromList(IContact contactModel)
+    public IServiceResult DeleteContactFromList(ContactModel contactModel)
     {
         try
         {
@@ -65,7 +65,7 @@ public class AddressBookService
             {
                 //_contacts = JsonConvert.DeserializeObject<List<ContactModel>>(content)!;    
 
-                _contacts = JsonConvert.DeserializeObject<List<IContact>>(content, new JsonSerializerSettings
+                _contacts = JsonConvert.DeserializeObject<List<ContactModel>>(content, new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.Objects,
                 })!;

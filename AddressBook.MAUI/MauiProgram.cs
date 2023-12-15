@@ -1,7 +1,12 @@
-﻿using AddressBook.MAUI.ViewModels;
+﻿using AddressBook.MAUI.Pages;
+using AddressBook.MAUI.Services;
+using AddressBook.MAUI.ViewModels;
 using AddressBook.Shared.Interfaces;
+using AddressBook.Shared.Models;
 using AddressBook.Shared.Services;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
+using System.Collections.ObjectModel;
 
 namespace AddressBook.MAUI
 {
@@ -19,11 +24,24 @@ namespace AddressBook.MAUI
                 });
 
 
+            builder.Services.AddSingleton<ContactListService>();    
+
             builder.Services.AddSingleton<MainViewModel>();
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<AddressBookService>();    
 
-    		builder.Logging.AddDebug();
+            builder.Services.AddSingleton<AddContactViewModel>();
+            builder.Services.AddSingleton<AddContactPage>();
+
+            builder.Services.AddSingleton<ContactListViewModel>();
+            builder.Services.AddSingleton<ContactListPage>();
+
+            builder.Services.AddSingleton<ContactDetailsViewModel>();
+            builder.Services.AddSingleton<ContactDetailsPage>();
+
+           
+
+            builder.Logging.AddDebug();
 
 
             return builder.Build();

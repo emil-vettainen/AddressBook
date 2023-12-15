@@ -1,8 +1,10 @@
-﻿namespace AddressBook.Shared.Interfaces;
+﻿using AddressBook.Shared.Models;
 
-internal interface IFileService
+namespace AddressBook.Shared.Interfaces;
+
+public interface IFileService
 {
     bool AddContactToFile(string content);
-    bool DeleteContactFromFile(IContact contact);
+    bool DeleteContactFromFile(ContactModel contact);
     string GetContactFromFile();
 }
