@@ -7,76 +7,125 @@
              xmlns:viewmodels="clr-namespace:AddressBook.MAUI.ViewModels"
              x:DataType="{x:Type viewmodels:ContactListViewModel}"
              
+             xmlns:servies="clr-namespace:AddressBook.MAUI.Services"
+             
+             xmlns:img="clr-namespace:System.Resources;assembly=System.Resources.ResourceManager"
              
              Title="My Contacts">
 
 
+    <ContentPage.ToolbarItems >
+        <ToolbarItem Text="Add Contacts" Command="{Binding NavigateToAddContactCommand}" />
+    </ContentPage.ToolbarItems>
 
 
 
-    <ScrollView>
+    <Grid ColumnDefinitions="*,*">
 
-        <Grid RowDefinitions="auto,*">
+        <StackLayout Grid.Column="0" Margin="20,20">
 
-            <!--<StackLayout Grid.Column="0" Margin="20,20">
+            <Label  Text="Ange ditt namn:" Margin="0,0,0,10" />
 
-                <Label  Text="Ange ditt namn:" Margin="0,0,0,10" />
+            <Entry Text="{Binding ContactModel.FirstName}"  />
 
-                <Entry Text="{Binding ContactModel.FirstName}"  />
+            <Label  Text="Ange efternamn:" Margin="0,0,0,10" />
 
-                <Label  Text="Ange efternamn:" Margin="0,0,0,10" />
+            <Entry  Text="{Binding ContactModel.LastName}"   />
 
-                <Entry  Text="{Binding ContactModel.LastName}"   />
+            <Label  Text="Ange email:" Margin="0,0,0,10" />
 
-                <Label  Text="Ange email:" Margin="0,0,0,10" />
+            <Entry  Text="{Binding ContactModel.Email}"   />
 
-                <Entry  Text="{Binding ContactModel.Email}"   />
-
-                <Button Command="{Binding AddContactCommand}" Text="Add" Margin="0,20,0,0" Background="#66B66D" FontSize="Small" />
+            <Button Command="{Binding AddContactCommand}" Text="Add" Margin="0,20,0,0" Background="#66B66D" FontSize="Small" />
 
 
-            </StackLayout>-->
+        </StackLayout>
 
-      
+        <CollectionView Grid.Column="1" ItemsSource="{Binding ContactList}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ContactModel">
+                    <Grid >
+                        <Frame >
+                            <Grid ColumnDefinitions="125, *">
+                                <Image Grid.Column="0" Source="dotnet_bot.png" HeightRequest="30" WidthRequest="30" />
+                                <HorizontalStackLayout Grid.Column="1">
+                                    <Label Text="{Binding FirstName}" />
+                                    <Label Text="{Binding Email}"/>
+                                </HorizontalStackLayout>
+                                <Button FontSize="Small" Grid.Column="1" Text="X" CommandParameter="{Binding .}" Command="{Binding Path=RemoveFromListCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ContactListViewModel}}}" />
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-            <CollectionView Grid.Row="1" ItemsSource="{Binding ContactListService.ContactList  } " SelectedItem="{Binding SelectedContact}" SelectionMode="Single" Margin="20,10,20,0">
+    </Grid>
+           
 
 
-              
+     
+                    
 
-
+            <!--<CollectionView 
+                ItemsSource="{Binding ContactList}"
+                Margin="20,10,20,0">
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type models:ContactModel}">
-                        <Grid ColumnDefinitions="*, auto" Padding="20,5">
+                         <Grid >
+                                <Frame Margin="10" BackgroundColor="Silver">
 
-                            <StackLayout Orientation="Horizontal"  Grid.Column="0" Margin="0,0">
-                                <Label Text="{Binding FirstName}" Padding="0,5,6,0" FontSize="16"/>
-                                <Label Text="{Binding LastName}" Padding="0,5,0,0" FontSize="16"/>
-                                
-                            </StackLayout>
+                                    <Grid >
 
-                            <Button FontSize="Small" Grid.Column="1" Text="X" CommandParameter="{Binding .}" Command="{Binding Path=RemoveFromListCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ContactListViewModel}}}" />
+                                         <Image 
+                                         Source="dotnet_bot.png"
+                                         HeightRequest="30"/>
 
-                        </Grid>
 
+                                        <VerticalStackLayout >
+                                            
+                                    
+                                        </VerticalStackLayout>
+                                        
+                                        
+                                       </Grid>
+                                   
+                                    
+                                    
+                                    
+                                        
+                       
+
+
+                                </Frame>
+
+
+                           </Grid>
                         
-                        
+
+
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 
-               
-            </CollectionView>
+            </CollectionView>-->
 
 
-            
-
-
-
-        </Grid>
-        
-        
-    </ScrollView>
 
     
 </ContentPage>
+
+
+
+<!--<Grid ColumnDefinitions="*, auto" Padding="20,5">
+
+    <StackLayout  Orientation="Horizontal"  Grid.Column="0" Margin="0,0">
+        <Label Text="{Binding FirstName}" Padding="0,5,6,0" FontSize="16"/>
+        <Label Text="{Binding LastName}" Padding="0,5,0,0" FontSize="16"/>
+
+    </StackLayout>
+
+    <Button FontSize="Small" Grid.Column="1" Text="X" CommandParameter="{Binding .}" Command="{Binding Path=RemoveFromListCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ContactListViewModel}}}" />
+
+</Grid>-->

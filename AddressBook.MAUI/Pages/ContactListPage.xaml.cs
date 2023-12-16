@@ -9,10 +9,10 @@ public partial class ContactListPage : ContentPage
 		InitializeComponent();
 		BindingContext = contactListViewModel;
 
-        ToolbarItems.Add(new ToolbarItem("Add Contacts", null, async () =>
-        {
-            await Shell.Current.GoToAsync("AddContactPage");
-            // Lägg till logik för knappen här
-        }));
+        //ToolbarItems.Add(new ToolbarItem("Add Contact", null, async () =>
+        //{
+        //    await Shell.Current.GoToAsync("AddContactPage");
+        //    // Lägg till logik för knappen här
+        //}));
     }
 }

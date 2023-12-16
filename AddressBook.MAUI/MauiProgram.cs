@@ -23,6 +23,7 @@ namespace AddressBook.MAUI
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+           
 
             builder.Services.AddSingleton<ContactListService>();    
 
@@ -39,6 +40,9 @@ namespace AddressBook.MAUI
             builder.Services.AddSingleton<ContactDetailsViewModel>();
             builder.Services.AddSingleton<ContactDetailsPage>();
 
+            builder.Services.AddSingleton<ContactListService>();
+
+            builder.Services.AddSingleton<BaseViewModel>();
            
 
             builder.Logging.AddDebug();

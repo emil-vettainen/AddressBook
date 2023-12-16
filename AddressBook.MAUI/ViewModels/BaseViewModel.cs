@@ -3,26 +3,31 @@ using AddressBook.Shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 
-namespace AddressBook.MAUI.Services;
+namespace AddressBook.MAUI.ViewModels;
 
-public partial class ContactListService : ObservableObject
+public partial class BaseViewModel : ObservableObject
 {
+    public readonly AddressBookService _addressBookService;
 
-    private readonly AddressBookService _addressBookService;
+    [ObservableProperty]
+    private ObservableCollection<ContactModel> _contactList = [];
+
    
 
-    public ContactListService(AddressBookService addressBookService)
+
+    public BaseViewModel(AddressBookService addressBookService)
     {
         _addressBookService = addressBookService;
-      
         ContactList = new ObservableCollection<ContactModel>((List<ContactModel>)_addressBookService.GetContactFromList());
+
+
     }
 
 
-    [ObservableProperty]
-    public ObservableCollection<ContactModel> _contactList = [];
+
+
+
+
+
 
 }
-
-
-

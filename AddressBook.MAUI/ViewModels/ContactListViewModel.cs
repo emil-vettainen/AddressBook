@@ -9,68 +9,84 @@ using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
+
 namespace AddressBook.MAUI.ViewModels;
 
-public partial class ContactListViewModel : ObservableObject
+public partial class ContactListViewModel : BaseViewModel
 {
-    private readonly AddressBookService _addressBookService;
-    private readonly ContactListService _contactListService;
 
-    //private readonly ObservableCollection<ContactModel> _contactList;
-
-   
-
-    public ContactListViewModel(AddressBookService addressBookService, ContactListService contactListService)
+    public ContactListViewModel(AddressBookService addressBookService) : base(addressBookService)
     {
-        _addressBookService = addressBookService;
-        _contactListService = contactListService;
-        //ContactList = new ObservableCollection<ContactModel>((List<ContactModel>)_addressBookService.GetContactFromList());
-
-       
+      
     }
 
-
-    public ContactListService ContactListService => _contactListService;
-
-
     [ObservableProperty]
-    public ContactModel _contactModel = new();
+    private ContactModel _contactModel = new();
+
+
+    //[ObservableProperty]
+    //private ContactModel _contactModel;
+
+
+
+    //private readonly AddressBookService _addressBookService;
 
 
     //[ObservableProperty]
     //private ObservableCollection<ContactModel> _contactList = [];
 
 
+    //public ContactListViewModel(AddressBookService addressBookService)
+    //{
+    //    _addressBookService = addressBookService;
+
+    //    //ContactList = new ObservableCollection<ContactModel>((List<ContactModel>)_addressBookService.GetContactFromList());
+
+    //}
 
 
-    private ContactModel? _selectedContact;
 
-    public ContactModel SelectedContact
-    {
-        get => _selectedContact!;
-        set
-        {
-            SetProperty(ref _selectedContact, value);
-            ShowContactDetails(_selectedContact);
-        }
-    }
 
+    //private ContactModel? _selectedContact;
+
+    //public ContactModel SelectedContact
+    //{
+    //    get => _selectedContact!;
+    //    set
+    //    {
+    //        SetProperty(ref _selectedContact, value);
+    //        ShowContactDetails(_selectedContact);
+
+    //    }
+    //}
 
 
     [RelayCommand]
-    private void ShowContactDetails(ContactModel contactModel)
+    public async Task NavigateToAddContact()
     {
-        var contactDetailsViewModel = new ContactDetailsViewModel(contactModel);
-        Shell.Current.Navigation.PushAsync(new ContactDetailsPage(contactDetailsViewModel));
-
+        await Shell.Current.GoToAsync(nameof(AddContactPage));
     }
+
+
+    //[RelayCommand]
+    //private async Task ShowContactDetails(ContactModel contactModel)
+    //{
+
+
+
+    //    var contactDetailsViewModel = new ContactDetailsViewModel(contactModel);
+    //    await Shell.Current.Navigation.PushAsync(new ContactDetailsPage(contactDetailsViewModel));
+
+
+
+    //}
 
 
 
     [RelayCommand]
     private void RemoveFromList(ContactModel contactModel)
     {
-      
+
 
         var result = _addressBookService.DeleteContactFromList(contactModel);
 
@@ -78,11 +94,11 @@ public partial class ContactListViewModel : ObservableObject
         {
             case Shared.Enums.ResultStatus.Deleted:
 
-                _contactListService.ContactList.Remove(contactModel);
+                ContactList.Remove(contactModel);
 
 
 
-                
+
 
                 break;
 
@@ -100,42 +116,40 @@ public partial class ContactListViewModel : ObservableObject
     }
 
 
-    //[RelayCommand]
-    //public void AddContact()
-    //{
+    [RelayCommand]
+    public void AddContact()
+    {
 
 
 
-    //    if (!string.IsNullOrWhiteSpace(ContactModel.Email) && !string.IsNullOrWhiteSpace(ContactModel.FirstName))
-    //    {
-    //        var result = _addressBookService.AddContactToList(ContactModel);
+        if (!string.IsNullOrWhiteSpace(ContactModel.Email) && !string.IsNullOrWhiteSpace(ContactModel.FirstName))
+        {
+            var result = _addressBookService.AddContactToList(ContactModel);
 
 
-    //        switch (result.Status)
-    //        {
-    //            case Shared.Enums.ResultStatus.Successed:
+            switch (result.Status)
+            {
+                case Shared.Enums.ResultStatus.Successed:
 
 
-    //                ContactList.Add(ContactModel);
+                    ContactList.Add(ContactModel);
 
 
-    //                ContactModel = new ContactModel();
-    //                //UpdateList();
+                    ContactModel = new ContactModel();
+                    //UpdateList();
 
-    //                break;
+                    break;
 
-    //            case Shared.Enums.ResultStatus.AlreadyExist:
-
-
-    //                break;
-
-    //            default:
-
-    //                break;
-    //        }
-    //    }
-    //}
+                case Shared.Enums.ResultStatus.AlreadyExist:
 
 
+                    break;
+
+                default:
+
+                    break;
+            }
+        }
+    }
 
 }

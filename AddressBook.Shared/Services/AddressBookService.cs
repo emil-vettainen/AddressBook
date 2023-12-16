@@ -41,21 +41,6 @@ public class AddressBookService
         return result;
     }
 
-    public IServiceResult DeleteContactFromList(ContactModel contactModel)
-    {
-        try
-        {
-            _fileService.DeleteContactFromFile(contactModel);
-            result.Status = Enums.ResultStatus.Deleted;
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
-            result.Status = Enums.ResultStatus.Failed;
-        }
-        return result;
-    }
-
     public IEnumerable<IContact> GetContactFromList()
     {
         try
@@ -76,5 +61,36 @@ public class AddressBookService
             Debug.WriteLine(ex.Message);
         }
         return _contacts;
+    }
+
+    public IServiceResult UpdateContactToList (ContactModel contactModel)
+    {
+        try
+        {
+            _fileService.UpDateContactInFile(contactModel);
+            result.Status = Enums.ResultStatus.Updated;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            result.Status = Enums.ResultStatus.Failed;
+        }
+        return result;
+
+    }
+
+    public IServiceResult DeleteContactFromList(ContactModel contactModel)
+    {
+        try
+        {
+            _fileService.DeleteContactFromFile(contactModel);
+            result.Status = Enums.ResultStatus.Deleted;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            result.Status = Enums.ResultStatus.Failed;
+        }
+        return result;
     }
 }
