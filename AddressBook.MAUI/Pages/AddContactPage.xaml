@@ -6,6 +6,7 @@
              xmlns:viewmodel ="clr-namespace:AddressBook.MAUI.ViewModels"
              x:DataType="{x:Type viewmodel:AddContactViewModel}"
              
+             
              Title="AddContactPage">
 
 
@@ -15,7 +16,7 @@
 
             <Label  Text="Ange ditt namn:" Margin="0,0,0,10" />
 
-            <Entry Text="{Binding ContactModel.FirstName}"  />
+            <Entry Text="{Binding ContactModel.FirstName }"  />
 
             <Label  Text="Ange efternamn:" Margin="0,0,0,10" />
 

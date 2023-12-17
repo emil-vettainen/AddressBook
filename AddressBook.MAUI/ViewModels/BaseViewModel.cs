@@ -2,6 +2,7 @@
 using AddressBook.Shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace AddressBook.MAUI.ViewModels;
 
@@ -18,16 +19,15 @@ public partial class BaseViewModel : ObservableObject
     public BaseViewModel(AddressBookService addressBookService)
     {
         _addressBookService = addressBookService;
-        ContactList = new ObservableCollection<ContactModel>((List<ContactModel>)_addressBookService.GetContactFromList());
-
+        UpdateList();
+    
 
     }
 
+   
 
-
-
-
-
-
-
+    public void UpdateList ()
+    {
+        ContactList = new ObservableCollection<ContactModel>((List<ContactModel>)_addressBookService.GetContactFromList());
+    }
 }

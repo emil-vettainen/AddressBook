@@ -12,39 +12,31 @@ using System.Windows.Input;
 
 namespace AddressBook.MAUI.ViewModels;
 
-public partial class ContactListViewModel : BaseViewModel
+public partial class ContactListViewModel : ObservableObject
 {
+  
+    private readonly AddressBookService _addressBookService;
+    private ContactListService _contactListService;
 
-    public ContactListViewModel(AddressBookService addressBookService) : base(addressBookService)
+    public ContactListViewModel(AddressBookService addressBookService, ContactListService contactListService)
     {
-      
+        _addressBookService = addressBookService;
+        _contactListService = contactListService;
+
+        
+
+
     }
 
+
+    public ObservableCollection<ContactModel> ContactList => _contactListService.ContactList;
+
+
     [ObservableProperty]
-    private ContactModel _contactModel = new();
-
-
-    //[ObservableProperty]
-    //private ContactModel _contactModel;
-
-
-
-    //private readonly AddressBookService _addressBookService;
-
+    private ContactModel _contactPerson = new ContactModel();
 
     //[ObservableProperty]
-    //private ObservableCollection<ContactModel> _contactList = [];
-
-
-    //public ContactListViewModel(AddressBookService addressBookService)
-    //{
-    //    _addressBookService = addressBookService;
-
-    //    //ContactList = new ObservableCollection<ContactModel>((List<ContactModel>)_addressBookService.GetContactFromList());
-
-    //}
-
-
+    //private ObservableCollection<ContactModel> _contactList;
 
 
     //private ContactModel? _selectedContact;
@@ -94,11 +86,8 @@ public partial class ContactListViewModel : BaseViewModel
         {
             case Shared.Enums.ResultStatus.Deleted:
 
-                ContactList.Remove(contactModel);
-
-
-
-
+                _contactListService.ContactList.Remove(contactModel);
+      
 
                 break;
 
@@ -122,9 +111,9 @@ public partial class ContactListViewModel : BaseViewModel
 
 
 
-        if (!string.IsNullOrWhiteSpace(ContactModel.Email) && !string.IsNullOrWhiteSpace(ContactModel.FirstName))
+        if (!string.IsNullOrWhiteSpace(ContactPerson.FirstName) && !string.IsNullOrWhiteSpace(ContactPerson.Email))
         {
-            var result = _addressBookService.AddContactToList(ContactModel);
+            var result = _addressBookService.AddContactToList(ContactPerson);
 
 
             switch (result.Status)
@@ -132,15 +121,20 @@ public partial class ContactListViewModel : BaseViewModel
                 case Shared.Enums.ResultStatus.Successed:
 
 
-                    ContactList.Add(ContactModel);
+                    //ContactList.Add(ContactPerson);
+                    //_contactListService.Update();
 
 
-                    ContactModel = new ContactModel();
-                    //UpdateList();
+                    _contactListService.ContactList.Add(ContactPerson);
+
+                    ContactPerson = new ContactModel();
+
 
                     break;
 
                 case Shared.Enums.ResultStatus.AlreadyExist:
+
+                    Shell.Current.DisplayAlert("Kontakten finns redan", "", "Ok");
 
 
                     break;

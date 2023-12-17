@@ -114,7 +114,7 @@ internal class FileService(string filePath) : IFileService
             if (File.Exists(_filePath)) 
             {
                 var existingContent = GetContactFromFile();
-                var existingContacts = JsonConvert.DeserializeObject<List<ContactModel>>(existingContent) ?? new List<ContactModel>();
+                var existingContacts = JsonConvert.DeserializeObject<List<ContactModel>>(existingContent);
                 var contactToRemove = existingContacts.FirstOrDefault(x => x.Email == contact.Email);
 
                 if (contactToRemove != null)

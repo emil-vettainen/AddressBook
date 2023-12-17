@@ -11,7 +11,7 @@ namespace AddressBook.Shared.Services;
 public class AddressBookService 
 {
     private readonly IFileService _fileService = new FileService(@"C:\CSharp\AddressBook\AddressBook.MAUI\ContactList.json");
-    private List<ContactModel> _contacts = [];
+    private  List<ContactModel> _contacts = [];
     IServiceResult result = new ServiceResult();
 
     public IServiceResult AddContactToList(ContactModel contactModel)
@@ -67,6 +67,7 @@ public class AddressBookService
     {
         try
         {
+            _contacts.Remove(contactModel);
             _fileService.UpDateContactInFile(contactModel);
             result.Status = Enums.ResultStatus.Updated;
         }
@@ -83,6 +84,7 @@ public class AddressBookService
     {
         try
         {
+            _contacts.Remove(contactModel);
             _fileService.DeleteContactFromFile(contactModel);
             result.Status = Enums.ResultStatus.Deleted;
         }

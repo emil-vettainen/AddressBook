@@ -9,18 +9,22 @@ public partial class ContactListService : ObservableObject
 {
 
     private readonly AddressBookService _addressBookService;
+
    
+    [ObservableProperty]
+    private ObservableCollection<ContactModel> _contactList = [];
+
+    [ObservableProperty]
+    private ContactModel _contactPerson = new();
 
     public ContactListService(AddressBookService addressBookService)
     {
         _addressBookService = addressBookService;
-      
+
         ContactList = new ObservableCollection<ContactModel>((List<ContactModel>)_addressBookService.GetContactFromList());
+
     }
 
-
-    [ObservableProperty]
-    public ObservableCollection<ContactModel> _contactList = [];
 
 }
 

@@ -8,28 +8,23 @@ using System.Collections.ObjectModel;
 
 namespace AddressBook.MAUI.ViewModels;
 
-public partial class AddContactViewModel : BaseViewModel
+public partial class AddContactViewModel : ObservableObject
 {
+    private ContactListService _contactListService;
+    private readonly AddressBookService _addressBookService;
 
-    //private readonly AddressBookService _addressBookService;
-
-
-    //public AddContactViewModel(AddressBookService addressBookService)
-    //{
-    //    _addressBookService = addressBookService;
- 
-    //}
-
+    public AddContactViewModel(ContactListService contactListService, AddressBookService addressBookService)
+    {
+        _contactListService = contactListService;
+        _addressBookService = addressBookService;
+    }
 
 
 
     [ObservableProperty]
     private ContactModel _contactModel = new();
 
-    public AddContactViewModel(AddressBookService addressBookService) : base(addressBookService)
-    {
 
-    }
 
     [RelayCommand]
     public void AddContact()
@@ -47,11 +42,11 @@ public partial class AddContactViewModel : BaseViewModel
                 case Shared.Enums.ResultStatus.Successed:
 
 
-                    ContactList.Add(ContactModel);
+                    _contactListService.ContactList.Add(ContactModel);
 
                     ContactModel = new();
-
-                    Shell.Current.GoToAsync("//ContactListPage");
+                
+                    Shell.Current.GoToAsync("//ContactListPage", false);
 
 
 
