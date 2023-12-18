@@ -33,7 +33,23 @@ public partial class ContactListViewModel : ObservableObject
 
 
     [ObservableProperty]
-    private ContactModel _contactPerson = new ContactModel();
+    private ContactModel _contactPerson;
+
+
+
+    [RelayCommand]
+    public async Task GoToDetailsPage(ContactModel contactModel)
+    {
+        //await Shell.Current.GoToAsync($"{nameof(ContactDetailsPage)}?ContactModel={contactModel}");
+
+        if (contactModel == null) return;
+
+        await Shell.Current.GoToAsync($"{nameof(ContactDetailsPage)}", true, new Dictionary<string, object>
+        {
+            ["ContactModel"] = contactModel
+        });
+    }
+
 
     //[ObservableProperty]
     //private ObservableCollection<ContactModel> _contactList;
@@ -105,45 +121,45 @@ public partial class ContactListViewModel : ObservableObject
     }
 
 
-    [RelayCommand]
-    public void AddContact()
-    {
+    //[RelayCommand]
+    //public void AddContact()
+    //{
 
 
 
-        if (!string.IsNullOrWhiteSpace(ContactPerson.FirstName) && !string.IsNullOrWhiteSpace(ContactPerson.Email))
-        {
-            var result = _addressBookService.AddContactToList(ContactPerson);
+    //    if (!string.IsNullOrWhiteSpace(ContactPerson.FirstName) && !string.IsNullOrWhiteSpace(ContactPerson.Email))
+    //    {
+    //        var result = _addressBookService.AddContactToList(ContactPerson);
 
 
-            switch (result.Status)
-            {
-                case Shared.Enums.ResultStatus.Successed:
+    //        switch (result.Status)
+    //        {
+    //            case Shared.Enums.ResultStatus.Successed:
 
 
-                    //ContactList.Add(ContactPerson);
-                    //_contactListService.Update();
+    //                //ContactList.Add(ContactPerson);
+    //                //_contactListService.Update();
 
 
-                    _contactListService.ContactList.Add(ContactPerson);
+    //                _contactListService.ContactList.Add(ContactPerson);
 
-                    ContactPerson = new ContactModel();
-
-
-                    break;
-
-                case Shared.Enums.ResultStatus.AlreadyExist:
-
-                    Shell.Current.DisplayAlert("Kontakten finns redan", "", "Ok");
+    //                ContactPerson = new ContactModel();
 
 
-                    break;
+    //                break;
 
-                default:
+    //            case Shared.Enums.ResultStatus.AlreadyExist:
 
-                    break;
-            }
-        }
-    }
+    //                Shell.Current.DisplayAlert("Kontakten finns redan", "", "Ok");
+
+
+    //                break;
+
+    //            default:
+
+    //                break;
+    //        }
+    //    }
+    //}
 
 }

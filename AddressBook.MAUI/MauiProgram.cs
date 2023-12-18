@@ -37,8 +37,8 @@ namespace AddressBook.MAUI
             builder.Services.AddSingleton<ContactListViewModel>();
             builder.Services.AddSingleton<ContactListPage>();
 
-            builder.Services.AddSingleton<ContactDetailsViewModel>();
-            builder.Services.AddSingleton<ContactDetailsPage>();
+            builder.Services.AddTransient<ContactDetailsViewModel>();
+            builder.Services.AddTransient<ContactDetailsPage>();
 
             builder.Services.AddSingleton<ContactListService>();
 
