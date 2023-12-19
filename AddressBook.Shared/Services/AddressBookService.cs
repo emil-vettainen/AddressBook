@@ -41,7 +41,7 @@ public class AddressBookService
         return result;
     }
 
-    public IEnumerable<IContact> GetContactFromList()
+    public IEnumerable<ContactModel> GetContactFromList()
     {
         try
         {

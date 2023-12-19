@@ -10,23 +10,46 @@
              Title="AddContactPage">
 
 
+    <!--<ContentPage.ToolbarItems >
+        <ToolbarItem Text="Save" Command="{Binding AddContactCommand}"  />
+    </ContentPage.ToolbarItems>-->
+
+   
+    
+    
     <ScrollView >
 
-        <StackLayout Grid.Column="0" Margin="20,20">
+        <StackLayout Grid.Column="0" Margin="20,20" Spacing="5" >
 
-            <Label  Text="Ange ditt namn:" Margin="0,0,0,10" />
+            <Label  Text="Förnamn:" Margin="0,0,0,5"  FontSize="16"/>
 
-            <Entry Text="{Binding ContactModel.FirstName }"  />
+            <Entry Text="{Binding ContactModel.FirstName }" FontSize="16" />
 
-            <Label  Text="Ange efternamn:" Margin="0,0,0,10" />
+            <Label  Text="Efternamn:" Margin="0,5,0,5"  FontSize="16" />
 
-            <Entry  Text="{Binding ContactModel.LastName}"   />
+            <Entry  Text="{Binding ContactModel.LastName}"   FontSize="16" />
 
-            <Label  Text="Ange email:" Margin="0,0,0,10" />
+            <Label  Text="Telefonnummer:" Margin="0,5,0,5"  FontSize="16"/>
 
-            <Entry  Text="{Binding ContactModel.Email}"   />
+            <Entry  Text="{Binding ContactModel.PhoneNumber}"   FontSize="16" />
 
-            <Button Command="{Binding AddContactCommand}" Text="Add" Margin="0,20,0,0" Background="#66B66D" FontSize="Small" />
+            <Label  Text="Email:" Margin="0,5,0,5"  FontSize="16"/>
+
+            <Entry  Text="{Binding ContactModel.Email}"   FontSize="16" />
+
+            <Label  Text="Gatuadress:" Margin="0,5,0,5"  FontSize="16"/>
+
+            <Entry  Text="{Binding ContactModel.StreetName}"   FontSize="16" />
+            
+            <Label  Text="Postnummer:" Margin="0,5,0,5"  FontSize="16"/>
+
+            <Entry  Text="{Binding ContactModel.PostalCode}"   FontSize="16" />
+            
+            <Label  Text="Ort:" Margin="0,5,0,5"  FontSize="16"/>
+
+            <Entry  Text="{Binding ContactModel.PostTown}"   FontSize="16" />
+
+            <Button Command="{Binding AddContactCommand}" Text="Add" Margin="0,30,0,0" Background="#66B66D" FontSize="18" />
 
 
         </StackLayout>

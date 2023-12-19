@@ -14,8 +14,8 @@ public partial class ContactDetailsPage : ContentPage
 		BindingContext = contactDetailsViewModel;
 	}
 
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
-    {
-        base.OnNavigatedTo(args);
-    }
+	//protected override void OnNavigatedTo(NavigatedToEventArgs args)
+	//{
+	//	base.OnNavigatedTo(args);
+	//}
 }

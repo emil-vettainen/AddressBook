@@ -11,8 +11,10 @@
     Title="AddressBook.MAUI">
 
     <ShellContent Title="Första sidan" Route="ContactListPage" ContentTemplate="{DataTemplate pages:ContactListPage}" />
-    <!--<ShellContent Title="Lägg till sidan " Route="AddContactPage" ContentTemplate="{DataTemplate pages:AddContactPage}" />
-    <ShellContent Title="Detaljer " Route="ContactDetailsPage" ContentTemplate="{DataTemplate pages:ContactDetailsPage}" />-->
+    <ShellContent Title="Första sidan" Route="ContactEditPage" ContentTemplate="{DataTemplate pages:ContactEditPage}" />
+    <ShellContent Title="Första sidan" Route="ContactDetailsPage" ContentTemplate="{DataTemplate pages:ContactDetailsPage}" />
+    <ShellContent Title="Första sidan" Route="AddContactPage" ContentTemplate="{DataTemplate pages:AddContactPage}" />
+
 
 
 

@@ -43,7 +43,11 @@ namespace AddressBook.MAUI
             builder.Services.AddSingleton<ContactListService>();
 
             builder.Services.AddSingleton<BaseViewModel>();
-           
+
+
+            builder.Services.AddTransient<ContactEditViewModel>();
+            builder.Services.AddTransient<ContactEditPage>();
+
 
             builder.Logging.AddDebug();
 

@@ -18,13 +18,13 @@ public partial class MainViewModel : ObservableObject
 
 
     [ObservableProperty]
-    private ObservableCollection<IContact> _contactList = [];
+    private ObservableCollection<ContactModel> _contactList = [];
 
 
     public MainViewModel(AddressBookService addressBook)
     {
         _addressBook = addressBook;
-        ContactList = new ObservableCollection<IContact>(_addressBook.GetContactFromList());
+        ContactList = new ObservableCollection<ContactModel>(_addressBook.GetContactFromList());
         //UpdateList();
     }
 

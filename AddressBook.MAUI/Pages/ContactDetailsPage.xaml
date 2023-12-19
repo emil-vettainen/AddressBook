@@ -11,33 +11,81 @@
              
              Title="ContactDetailsPage">
 
-    <Grid RowDefinitions="auto,auto, auto" RowSpacing="40" Margin="20">
-        <VerticalStackLayout Grid.Row="0">
-            <Label Text="{Binding ContactModel.FirstName}" />
-            <Label Text="{Binding ContactModel.LastName}" />
-            <Label Text="{Binding ContactModel.Email}" />
+    <Grid RowDefinitions="auto,auto"   RowSpacing="10" ColumnSpacing="10" Margin="20">
+
+        <StackLayout Grid.Row="0" >
+
+            <Grid RowDefinitions="auto,auto,auto,auto,auto,auto, auto" ColumnDefinitions="auto,*" ColumnSpacing="10" RowSpacing="10">
+
+                <Label Grid.Column="0" Text="Förnamn:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
+                <Entry Grid.Column="1" Text="{Binding ContactModel.FirstName}" FontSize="16" />
+
+                <Label Grid.Column="0" Grid.Row="1" Text="Efternamn:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
+                <Entry Grid.Column="1" Grid.Row="1" Text="{Binding ContactModel.LastName}" FontSize="16" />
+
+                <Label Grid.Column="0" Grid.Row="2" Text="Telefonnummer:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
+                <Entry Grid.Column="1" Grid.Row="2" Text="{Binding ContactModel.PhoneNumber}" FontSize="16" />
+
+                <Label Grid.Column="0" Grid.Row="3" Text="Email:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
+                <Entry Grid.Column="1" Grid.Row="3" Text="{Binding ContactModel.Email}" FontSize="16" />
+
+                <Label Grid.Column="0" Grid.Row="4" Text="Gatuadress:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
+                <Entry Grid.Column="1" Grid.Row="4" Text="{Binding ContactModel.StreetName}" FontSize="16" />
+
+                <Label Grid.Column="0" Grid.Row="5" Text="Postnummer:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
+                <Entry Grid.Column="1" Grid.Row="5" Text="{Binding ContactModel.PostalCode}" FontSize="16" />
+
+                <Label Grid.Column="0" Grid.Row="6" Text="Ort:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
+                <Entry Grid.Column="1" Grid.Row="6" Text="{Binding ContactModel.PostTown}" FontSize="16" />
+
+            </Grid>
+
+        </StackLayout>
+
+       
+
+        <VerticalStackLayout Grid.Row="1" Spacing="10">
+            <Button  Margin="0,20,0,0" FontSize="18" Background="#66B66D" Grid.Column="1" Text="Update" CommandParameter="{Binding ContactModel}" Command="{Binding Path=UpdateToListCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ContactDetailsViewModel}}}" />
+            <Button  FontSize="18" Background="#ff3126" Grid.Column="1" Text="Delete" CommandParameter="{Binding ContactModel}" Command="{Binding Path=RemoveFromListCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ContactDetailsViewModel}}}" />
+            <Button  FontSize="18" Text="Cancel" Command="{Binding GoBackCommand}" />
+            <Button  Margin="0,20,0,0" FontSize="18" Background="#66B66D" Grid.Column="1" Text="Edit" CommandParameter="{Binding ContactModel}" Command="{Binding Path=GoToEditPageCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ContactDetailsViewModel}}}" />
         </VerticalStackLayout>
 
-        <Button Grid.Row="1" Text="Go Back!" Command="{Binding GoBackCommand}" />
-        <Button Grid.Row="2" FontSize="Small" Grid.Column="1" Text="X" CommandParameter="{Binding ContactModel}" Command="{Binding Path=RemoveFromListCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ContactDetailsViewModel}}}" />
-    </Grid>
+
+
+
+
+        
+
+
+        <!--<Entry Text="{Binding ContactModel.LastName}" FontSize="16"/>
+            <Entry Text="{Binding ContactModel.PhoneNumber}" FontSize="16"/>
+            <Entry Text="{Binding ContactModel.Email}" FontSize="16"/>
+            <Entry Text="{Binding ContactModel.StreetName}" FontSize="16" />
+            <Entry Text="{Binding ContactModel.PostalCode}" FontSize="16"/>
+            <Entry Text="{Binding ContactModel.PostTown}" FontSize="16"/>-->
        
-                    
-              
+
+
+       
+    </Grid>
+
+
+            
 
    
 
-    <!--<CollectionView Grid.Column="1" >
+    <!--<CollectionView Grid.Column="1"  >
         <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="models:ContactModel">
+            <DataTemplate >
                 <Grid ColumnDefinitions="*, auto" ColumnSpacing="20" >
                     <Frame Grid.Row="0" BackgroundColor="Silver" Margin="0,0,0,25">
 
                         <Grid ColumnDefinitions="50, *" ColumnSpacing="20" >
                             <Image Grid.Column="0" Source="dotnet_bot.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" />
                             <HorizontalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Center">
-                                <Label Text="{Binding FirstName }" TextColor="Black" FontSize="16" />
-                                <Label Text="{Binding Email}" TextColor="black" FontSize="16" />
+                                <Label Text="{Binding ContactModel.FirstName }" TextColor="Black" FontSize="16" />
+                                <Label Text="{Binding ContactModel.Email}" TextColor="black" FontSize="16" />
                             </HorizontalStackLayout>
 
                         </Grid>

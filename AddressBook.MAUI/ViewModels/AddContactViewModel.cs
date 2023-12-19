@@ -46,7 +46,7 @@ public partial class AddContactViewModel : ObservableObject
 
                     ContactModel = new();
                 
-                    Shell.Current.GoToAsync("//ContactListPage", false);
+                    Shell.Current.GoToAsync("..");
 
 
 
@@ -56,7 +56,7 @@ public partial class AddContactViewModel : ObservableObject
 
                 case Shared.Enums.ResultStatus.AlreadyExist:
 
-
+                    Shell.Current.DisplayAlert("Kontakten finns redan", "", "Ok");
                     break;
 
                 default:

@@ -8,73 +8,51 @@
              x:DataType="{x:Type viewmodels:ContactListViewModel}"
              
              xmlns:services="clr-namespace:AddressBook.MAUI.Services"
-
-             
              xmlns:img="clr-namespace:System.Resources;assembly=System.Resources.ResourceManager"
              
-             Title="My Contacts">
+             Title="My Contacts" >
 
 
     <ContentPage.ToolbarItems >
-        <ToolbarItem Text="Add Contacts" Command="{Binding NavigateToAddContactCommand}" />
+        <ToolbarItem Text="Add Contacts" Command="{Binding NavigateToAddContactCommand}"  />
     </ContentPage.ToolbarItems>
 
 
-
-    <Grid ColumnDefinitions="*,*">
-
-        <!--<StackLayout Grid.Column="0" Margin="20,20">
-
-            <Label  Text="Ange ditt namn:" Margin="0,0,0,10" />
-
-            <Entry Text="{Binding ContactPerson.FirstName }"  />
-
-            <Label  Text="Ange efternamn:" Margin="0,0,0,10" />
-
-            <Entry  Text="{Binding ContactPerson.LastName}"   />
-
-            <Label  Text="Ange email:" Margin="0,0,0,10" />
-
-            <Entry  Text="{Binding ContactPerson.Email }"   />
-
-            <Button Command="{Binding AddContactCommand }" Text="Add" Margin="0,20,0,0" Background="#66B66D" FontSize="Small" />
-
-
-        </StackLayout>-->
-
-        <CollectionView Grid.Column="1" ItemsSource="{Binding ContactList  }">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:ContactModel">
-                    <Grid ColumnDefinitions="*, auto" ColumnSpacing="20" >
-                        <Frame Grid.Row="0" BackgroundColor="Silver" Margin="0,0,0,25">
-                            <Frame.GestureRecognizers >
-                                <TapGestureRecognizer CommandParameter="{Binding .}" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ContactListViewModel}}, Path=GoToDetailsPageCommand}"/>
-                            </Frame.GestureRecognizers>
-                            <Grid ColumnDefinitions="50, *" ColumnSpacing="20" >
-                                <Image Grid.Column="0" Source="dotnet_bot.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" />
-                                <HorizontalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Center">
-                                    <Label Text="{Binding FirstName }" TextColor="Black" FontSize="16" />
-                                    <Label Text="{Binding Email}" TextColor="black" FontSize="16" />
-                                </HorizontalStackLayout>
-                               
-                            </Grid>
-                          
-                        </Frame>
-
-                        <Button Margin="0,0,0,25" Grid.Row="1" FontSize="Small" Grid.Column="1" Text="X" CommandParameter="{Binding .}" Command="{Binding Path=RemoveFromListCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ContactListViewModel}}}" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-    </Grid>
-           
+    <CollectionView ItemsSource="{Binding ContactList  }" Margin="20,20">
+        <CollectionView.EmptyView>
+            <StackLayout>
+                <Label Text="Du har inga kontaker, tryck på lägg till för att skapa din första kontakt!" />
+            </StackLayout>
+        </CollectionView.EmptyView>
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:ContactModel">
+                <Grid ColumnDefinitions="*" ColumnSpacing="20" >
+                    <Frame Grid.Row="0" BackgroundColor="DarkGray" Margin="0,0,0,20" >
+                        <Frame.GestureRecognizers >
+                            <TapGestureRecognizer CommandParameter="{Binding .}" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ContactListViewModel}}, Path=GoToDetailsPageCommand}" />
+                        </Frame.GestureRecognizers>
+                        <Grid ColumnDefinitions="30, *" ColumnSpacing="10" >
+                            <Image Grid.Column="0" Source="contact.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center" />
+                            <HorizontalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
+                                <Label Text="{Binding FirstName }" TextColor="Black" FontSize="16" />
+                                <Label Text="{Binding LastName}" TextColor="black" FontSize="16" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Frame>
+                  
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 
 
-     
-                    
 
-            <!--<CollectionView 
+    <!--<Button Margin="0,0,0,0" Grid.Row="1" FontSize="Small" Grid.Column="1" Text="X" CommandParameter="{Binding .}" Command="{Binding Path=RemoveFromListCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ContactListViewModel}}}" />-->
+
+
+
+
+    <!--<CollectionView 
                 ItemsSource="{Binding ContactList}"
                 Margin="20,10,20,0">
 
