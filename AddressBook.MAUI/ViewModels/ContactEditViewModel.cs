@@ -18,12 +18,12 @@ public partial class ContactEditViewModel : ObservableObject, IQueryAttributable
     {
         _addressBookService = addressBookService;
         _contactListService = contactListService;
-        
+
     }
 
-   
 
-    private ContactListService  _contactListService;
+
+    private ContactListService _contactListService;
 
 
     [ObservableProperty]

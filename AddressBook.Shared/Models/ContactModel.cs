@@ -3,21 +3,21 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace AddressBook.Shared.Models;
 
-public partial class ContactModel : ObservableObject
+public partial class ContactModel : ObservableObject, IContact
 
 {
     [ObservableProperty]
     public string firstName = null!;
     [ObservableProperty]
-    public string lastName;
+    public string lastName = null!;
     [ObservableProperty]
-    public string streetName;
+    public string streetName = null!;
     [ObservableProperty]
-    public string postalCode;
+    public string postalCode = null!;
     [ObservableProperty]
-    public string postTown;
+    public string postTown = null!;
     [ObservableProperty]
-    public string phoneNumber;
+    public string phoneNumber = null!;
     [ObservableProperty]
-    public string email;
+    public string email = null!;
 }

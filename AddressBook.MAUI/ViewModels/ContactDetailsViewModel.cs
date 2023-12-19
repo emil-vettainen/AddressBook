@@ -23,7 +23,7 @@ namespace AddressBook.MAUI.ViewModels
         private ContactListService _contactListService;
 
         [ObservableProperty]
-        private ContactModel _contactModel;
+        private ContactModel _contactModel = null!;
 
         [RelayCommand]
         private async Task GoBack()
@@ -94,7 +94,7 @@ namespace AddressBook.MAUI.ViewModels
 
                     _contactListService.ContactList.Remove(contactModel);
 
-                    await Shell.Current.GoToAsync("//ContactListPage", false);
+                    await Shell.Current.GoToAsync("//ContactListPage");
 
                     break;
 

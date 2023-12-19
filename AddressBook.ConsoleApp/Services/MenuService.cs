@@ -136,8 +136,9 @@ internal class MenuService
         {
             Console.Clear();
             Console.WriteLine($"Namn: {contactModel.FirstName} {contactModel.LastName}\n");
-            Console.WriteLine($"Email: {contactModel.Email}");
-            Console.WriteLine($"Telefonnummer: {contactModel.PhoneNumber}\n");
+            Console.WriteLine($"Telefonnummer: {contactModel.PhoneNumber}");
+            Console.WriteLine($"Email: {contactModel.Email}\n");
+            
             Console.WriteLine($"Gatuadress: {contactModel.StreetName}");
             Console.WriteLine($"Postnummer: {contactModel.PostalCode} Postort: {contactModel.PostTown} \n\n");
 
@@ -196,7 +197,7 @@ internal class MenuService
         }
     }
 
-    private bool DelContact(IContact contact)
+    private bool DelContact(IContact contactModel)
     {
         while (true)
         {
@@ -221,16 +222,16 @@ internal class MenuService
 
     private void AddContact()
     {
-        ContactModel contactModel = new ContactModel(); 
+        IContact contact = new ContactModel();
 
         while (true)
         {
             Console.Write("Ange Förnamn: ");
-            contactModel.FirstName = Console.ReadLine()!;
+            contact.LastName = Console.ReadLine()!;
             Console.Write("Ange Epost: ");
-            contactModel.Email = Console.ReadLine()!;
+            contact.Email = Console.ReadLine()!;
 
-            var result = _addressBook.AddContactToList(contactModel);
+            var result = _addressBook.AddContactToList(contact);
 
             switch (result.Status)
             {

@@ -10,13 +10,13 @@ internal class FileService(string filePath) : IFileService
 {
     private readonly string _filePath = filePath;
 
-    public bool AddContactToFile(string content)
+    public bool AddContactToFile(string contact)
     {
         try
         {
             using (var sw = new StreamWriter(_filePath))
             {
-                sw.WriteLine(content); 
+                sw.WriteLine(contact); 
             }
             return true;
         }
@@ -39,11 +39,7 @@ internal class FileService(string filePath) : IFileService
                     return sr.ReadToEnd();
                 }
             }
-            //else
-            //{
-            //    File.WriteAllText(_filePath, string.Empty);
-            //    return string.Empty;
-            //}
+
         }
         catch (Exception ex)
         {
@@ -54,14 +50,14 @@ internal class FileService(string filePath) : IFileService
 
 
 
-    public bool UpDateContactInFile(ContactModel contact)
+    public bool UpDateContactInFile(IContact contact)
     {
         try
         {
             if (File.Exists(_filePath))
             {
                 var existingContent = GetContactFromFile();
-                var existingContacts = JsonConvert.DeserializeObject<List<ContactModel>>(existingContent) ?? new List<ContactModel>();
+                var existingContacts = JsonConvert.DeserializeObject<List<IContact>>(existingContent) ?? new List<IContact>();
 
                 var contactToUpdate = existingContacts.FirstOrDefault(x => x.Email == contact.Email);
 
@@ -107,14 +103,14 @@ internal class FileService(string filePath) : IFileService
 
 
 
-    public bool DeleteContactFromFile(ContactModel contact)
+    public bool DeleteContactFromFile(IContact contact)
     {
         try
         {
             if (File.Exists(_filePath)) 
             {
                 var existingContent = GetContactFromFile();
-                var existingContacts = JsonConvert.DeserializeObject<List<ContactModel>>(existingContent);
+                var existingContacts = JsonConvert.DeserializeObject<List<IContact>>(existingContent)!;
                 var contactToRemove = existingContacts.FirstOrDefault(x => x.Email == contact.Email);
 
                 if (contactToRemove != null)

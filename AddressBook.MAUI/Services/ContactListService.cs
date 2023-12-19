@@ -1,4 +1,5 @@
-﻿using AddressBook.Shared.Models;
+﻿using AddressBook.Shared.Interfaces;
+using AddressBook.Shared.Models;
 using AddressBook.Shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -13,7 +14,7 @@ public partial class ContactListService : ObservableObject
 
    
     [ObservableProperty]
-    private ObservableCollection<ContactModel> _contactList = [];
+    private ObservableCollection<IContact> _contactList = [];
 
     [ObservableProperty]
     private ContactModel _contactPerson = new();
@@ -28,7 +29,7 @@ public partial class ContactListService : ObservableObject
 
     public void Update()
     {
-        ContactList = new ObservableCollection<ContactModel>((List<ContactModel>)_addressBookService.GetContactFromList());
+        ContactList = new ObservableCollection<IContact>((List<IContact>)_addressBookService.GetContactFromList());
     }
 }
 

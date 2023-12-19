@@ -60,9 +60,13 @@ public partial class AddContactViewModel : ObservableObject
                     break;
 
                 default:
-
+                    
                     break;
             }
+        }
+        else
+        {
+            Shell.Current.DisplayAlert("Email måste anges!", "", "Ok");
         }
     }
 }

@@ -11,10 +11,10 @@ namespace AddressBook.Shared.Services;
 public class AddressBookService 
 {
     private readonly IFileService _fileService = new FileService(@"C:\CSharp\AddressBook\AddressBook.MAUI\ContactList.json");
-    private  List<ContactModel> _contacts = [];
+    private  List<IContact> _contacts = [];
     IServiceResult result = new ServiceResult();
 
-    public IServiceResult AddContactToList(ContactModel contactModel)
+    public IServiceResult AddContactToList(IContact contactModel)
     {
         try
         {
@@ -41,7 +41,7 @@ public class AddressBookService
         return result;
     }
 
-    public IEnumerable<ContactModel> GetContactFromList()
+    public IEnumerable<IContact> GetContactFromList()
     {
         try
         {
@@ -50,7 +50,7 @@ public class AddressBookService
             {
                 //_contacts = JsonConvert.DeserializeObject<List<ContactModel>>(content)!;    
 
-                _contacts = JsonConvert.DeserializeObject<List<ContactModel>>(content, new JsonSerializerSettings
+                _contacts = JsonConvert.DeserializeObject<List<IContact>>(content, new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.Objects,
                 })!;
@@ -63,7 +63,7 @@ public class AddressBookService
         return _contacts;
     }
 
-    public IServiceResult UpdateContactToList (ContactModel contactModel)
+    public IServiceResult UpdateContactToList (IContact contactModel)
     {
         try
         {
@@ -80,12 +80,12 @@ public class AddressBookService
 
     }
 
-    public IServiceResult DeleteContactFromList(ContactModel contactModel)
+    public IServiceResult DeleteContactFromList(IContact contact)
     {
         try
         {
-            _contacts.Remove(contactModel);
-            _fileService.DeleteContactFromFile(contactModel);
+            _contacts.Remove(contact);
+            _fileService.DeleteContactFromFile(contact);
             result.Status = Enums.ResultStatus.Deleted;
         }
         catch (Exception ex)
@@ -95,4 +95,6 @@ public class AddressBookService
         }
         return result;
     }
+
+   
 }
