@@ -7,7 +7,11 @@ namespace AddressBook.ConsoleApp.Services;
 
 internal class MenuService
 {
-    private readonly AddressBookService _addressBook = new AddressBookService();
+    private readonly IAddressBookService _addressBook = new AddressBookService();
+
+
+    private readonly InputService _inputService = new InputService();
+    private readonly ValidateSettings validateSettings = new ValidateSettings();
 
     public void DisplayMainMenu()
     {
@@ -50,8 +54,6 @@ internal class MenuService
     {
         var contactList = _addressBook.GetContactFromList();
         var selectedIndex = 0;
-
-        
 
         while (true)
         {
@@ -140,7 +142,7 @@ internal class MenuService
             Console.WriteLine($"Email: {contactModel.Email}\n");
             
             Console.WriteLine($"Gatuadress: {contactModel.StreetName}");
-            Console.WriteLine($"Postnummer: {contactModel.PostalCode} Postort: {contactModel.PostTown} \n\n");
+            Console.WriteLine($"Postnummer: {contactModel.PostalCode} Ort: {contactModel.PostTown} \n\n");
 
             Console.WriteLine("----------------------\n");
 
@@ -226,10 +228,15 @@ internal class MenuService
 
         while (true)
         {
-            Console.Write("Ange Förnamn: ");
-            contact.LastName = Console.ReadLine()!;
-            Console.Write("Ange Epost: ");
-            contact.Email = Console.ReadLine()!;
+            contact.FirstName = _inputService.GetValidInput("Ange Förnamn: ", input => !string.IsNullOrWhiteSpace((string?)input));
+            contact.LastName = _inputService.GetValidInput("Ange Efternamn: ", input => !string.IsNullOrWhiteSpace((string?)input));
+            contact.PhoneNumber = _inputService.GetValidInput("Ange Telefonnummer: ", input => !string.IsNullOrWhiteSpace((string?)input));
+            contact.Email = _inputService.GetValidInput("Ange epost: ", input => !string.IsNullOrWhiteSpace((string?)input));
+            contact.StreetName = _inputService.GetValidInput("Ange Gatuadress: ", input => !string.IsNullOrWhiteSpace((string?)input));
+            contact.PostalCode = _inputService.GetValidInput("Ange Postnummer: ", input => !string.IsNullOrWhiteSpace((string?)input));
+            contact.PostTown = _inputService.GetValidInput("Ange Ort: ", input => !string.IsNullOrWhiteSpace((string?)input));
+           
+
 
             var result = _addressBook.AddContactToList(contact);
 
@@ -279,7 +286,7 @@ internal class MenuService
         }
     }
 
-    private void PressAnyKeyToContinue()
+    public void PressAnyKeyToContinue()
     {
         Console.Clear();
         Console.Write("Felaktig inmatning! Tryck på valfri tangent för att försöka igen...");

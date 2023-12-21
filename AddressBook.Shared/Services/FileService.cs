@@ -49,7 +49,6 @@ internal class FileService(string filePath) : IFileService
     }
 
 
-
     public bool UpDateContactInFile(IContact contact)
     {
         try
@@ -57,7 +56,10 @@ internal class FileService(string filePath) : IFileService
             if (File.Exists(_filePath))
             {
                 var existingContent = GetContactFromFile();
-                var existingContacts = JsonConvert.DeserializeObject<List<IContact>>(existingContent) ?? new List<IContact>();
+                var existingContacts = JsonConvert.DeserializeObject<List<IContact>>(existingContent, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                })!;
 
                 var contactToUpdate = existingContacts.FirstOrDefault(x => x.Email == contact.Email);
 
@@ -76,7 +78,10 @@ internal class FileService(string filePath) : IFileService
                     // Uppdatera andra egenskaper enligt behov
 
                     // Spara uppdaterad kontaktlista till filen
-                    AddContactToFile(JsonConvert.SerializeObject(existingContacts));
+                    AddContactToFile(JsonConvert.SerializeObject(existingContacts, new JsonSerializerSettings
+                    {
+                        TypeNameHandling = TypeNameHandling.All
+                    }));
 
                     return true;
                 }
@@ -102,21 +107,26 @@ internal class FileService(string filePath) : IFileService
     }
 
 
-
-    public bool DeleteContactFromFile(IContact contact)
+    public bool DeleteContactFromFile(IContact contactModel)
     {
         try
         {
             if (File.Exists(_filePath)) 
             {
                 var existingContent = GetContactFromFile();
-                var existingContacts = JsonConvert.DeserializeObject<List<IContact>>(existingContent)!;
-                var contactToRemove = existingContacts.FirstOrDefault(x => x.Email == contact.Email);
+                var existingContacts = JsonConvert.DeserializeObject<List<IContact>>(existingContent, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                })!;
+                var contactToRemove = existingContacts.FirstOrDefault(x => x.Email == contactModel.Email);
 
                 if (contactToRemove != null)
                 {
                     existingContacts.Remove(contactToRemove);
-                    AddContactToFile(JsonConvert.SerializeObject(existingContacts));
+                    AddContactToFile(JsonConvert.SerializeObject(existingContacts, new JsonSerializerSettings
+                    {
+                        TypeNameHandling = TypeNameHandling.All
+                    }));
                 }
             }
             return true;
@@ -124,10 +134,8 @@ internal class FileService(string filePath) : IFileService
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
+            return false;
         }
-        return false;
+        
     }
-
-
- 
 }

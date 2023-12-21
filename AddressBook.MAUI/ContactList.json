@@ -1,1 +1,1 @@
-[{"$type":"AddressBook.Shared.Models.ContactModel, AddressBook.Shared","firstName":"Emil","lastName":"Emil","streetName":null,"postalCode":null,"postTown":null,"phoneNumber":null,"email":"Emil","FirstName":"Emil","LastName":"Emil","StreetName":null,"PostalCode":null,"PostTown":null,"PhoneNumber":null,"Email":"Emil"}]
+{"$type":"System.Collections.Generic.List`1[[AddressBook.Shared.Interfaces.IContact, AddressBook.Shared]], System.Private.CoreLib","$values":[]}

@@ -9,7 +9,9 @@
    x:DataType="{x:Type viewmodels:ContactDetailsViewModel}"
              
              
-             Title="ContactDetailsPage">
+             Title="{Binding ContactModel.FirstName}">
+
+    
 
     <Grid RowDefinitions="auto,auto"   RowSpacing="10" ColumnSpacing="10" Margin="20">
 

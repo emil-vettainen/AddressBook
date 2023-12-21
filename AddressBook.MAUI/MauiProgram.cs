@@ -29,7 +29,8 @@ namespace AddressBook.MAUI
 
             builder.Services.AddSingleton<MainViewModel>();
             builder.Services.AddSingleton<MainPage>();
-            builder.Services.AddSingleton<AddressBookService>();    
+            builder.Services.AddSingleton<AddressBookService>();
+            
 
             builder.Services.AddSingleton<AddContactViewModel>();
             builder.Services.AddSingleton<AddContactPage>();
@@ -42,7 +43,7 @@ namespace AddressBook.MAUI
 
             builder.Services.AddSingleton<ContactListService>();
 
-            builder.Services.AddSingleton<BaseViewModel>();
+     
 
 
             builder.Services.AddTransient<ContactEditViewModel>();

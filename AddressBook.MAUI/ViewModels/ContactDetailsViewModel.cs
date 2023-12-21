@@ -1,5 +1,6 @@
 ﻿using AddressBook.MAUI.Pages;
 using AddressBook.MAUI.Services;
+using AddressBook.Shared.Interfaces;
 using AddressBook.Shared.Models;
 using AddressBook.Shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -23,7 +24,7 @@ namespace AddressBook.MAUI.ViewModels
         private ContactListService _contactListService;
 
         [ObservableProperty]
-        private ContactModel _contactModel = null!;
+        private ContactModel _contactModel;
 
         [RelayCommand]
         private async Task GoBack()
@@ -82,7 +83,7 @@ namespace AddressBook.MAUI.ViewModels
         }
 
         [RelayCommand]
-        private async Task RemoveFromList(ContactModel contactModel)
+        private async Task RemoveFromList(IContact contactModel)
         {
 
 

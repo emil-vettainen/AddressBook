@@ -1,5 +1,6 @@
 ﻿using AddressBook.MAUI.Pages;
 using AddressBook.MAUI.Services;
+using AddressBook.Shared.Interfaces;
 using AddressBook.Shared.Models;
 using AddressBook.Shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -42,7 +43,7 @@ public partial class AddContactViewModel : ObservableObject
                 case Shared.Enums.ResultStatus.Successed:
 
 
-                    _contactListService.ContactList.Add(ContactModel);
+                    //_contactListService.ContactList.Add(ContactModel);
 
                     ContactModel = new();
                 

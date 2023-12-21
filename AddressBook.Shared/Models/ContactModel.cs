@@ -21,3 +21,5 @@ public partial class ContactModel : ObservableObject, IContact
     [ObservableProperty]
     public string email = null!;
 }
+
+

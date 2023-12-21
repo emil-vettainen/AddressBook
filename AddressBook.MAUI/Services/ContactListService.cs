@@ -17,7 +17,7 @@ public partial class ContactListService : ObservableObject
     private ObservableCollection<IContact> _contactList = [];
 
     [ObservableProperty]
-    private ContactModel _contactPerson = new();
+    private ContactModel _contactPerson = new ContactModel();
 
     public ContactListService(AddressBookService addressBookService)
     {
@@ -31,6 +31,8 @@ public partial class ContactListService : ObservableObject
     {
         ContactList = new ObservableCollection<IContact>((List<IContact>)_addressBookService.GetContactFromList());
     }
+
+
 }
 
 

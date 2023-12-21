@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.Shared", "Addre
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.ConsoleApp", "AddressBook.ConsoleApp\AddressBook.ConsoleApp.csproj", "{7035028B-82A0-4BCF-AF85-3A1110E7E8C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.ConsoleApp.Tests", "AddressBook.ConsoleApp.Tests\AddressBook.ConsoleApp.Tests.csproj", "{DEA084A5-CD00-43D9-AA0F-44ED2802303E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.WPF", "AddressBook.WPF\AddressBook.WPF.csproj", "{508E2D78-43FB-4E08-A86E-B98531E79D9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.MAUI", "AddressBook.MAUI\AddressBook.MAUI.csproj", "{829A6932-6D2C-43FA-9F4E-09B3FD935271}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressBook.MAUI", "AddressBook.MAUI\AddressBook.MAUI.csproj", "{829A6932-6D2C-43FA-9F4E-09B3FD935271}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Tests", "AddressBook.Tests\AddressBook.Tests.csproj", "{D99F3A41-AF62-457D-B5B4-83F33D8AEE7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +27,6 @@ Global
 		{7035028B-82A0-4BCF-AF85-3A1110E7E8C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7035028B-82A0-4BCF-AF85-3A1110E7E8C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7035028B-82A0-4BCF-AF85-3A1110E7E8C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DEA084A5-CD00-43D9-AA0F-44ED2802303E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DEA084A5-CD00-43D9-AA0F-44ED2802303E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DEA084A5-CD00-43D9-AA0F-44ED2802303E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DEA084A5-CD00-43D9-AA0F-44ED2802303E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{508E2D78-43FB-4E08-A86E-B98531E79D9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{508E2D78-43FB-4E08-A86E-B98531E79D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{508E2D78-43FB-4E08-A86E-B98531E79D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,6 +37,10 @@ Global
 		{829A6932-6D2C-43FA-9F4E-09B3FD935271}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{829A6932-6D2C-43FA-9F4E-09B3FD935271}.Release|Any CPU.Build.0 = Release|Any CPU
 		{829A6932-6D2C-43FA-9F4E-09B3FD935271}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D99F3A41-AF62-457D-B5B4-83F33D8AEE7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D99F3A41-AF62-457D-B5B4-83F33D8AEE7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D99F3A41-AF62-457D-B5B4-83F33D8AEE7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D99F3A41-AF62-457D-B5B4-83F33D8AEE7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

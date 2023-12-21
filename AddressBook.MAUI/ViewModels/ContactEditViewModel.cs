@@ -1,5 +1,6 @@
 ﻿using AddressBook.MAUI.Pages;
 using AddressBook.MAUI.Services;
+using AddressBook.Shared.Interfaces;
 using AddressBook.Shared.Models;
 using AddressBook.Shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -9,7 +10,7 @@ using Microsoft.Maui.Controls;
 namespace AddressBook.MAUI.ViewModels;
 
 [QueryProperty(nameof(ContactModel), nameof(ContactModel))]
-public partial class ContactEditViewModel : ObservableObject, IQueryAttributable
+public partial class ContactEditViewModel : ObservableObject
 {
 
     private readonly AddressBookService _addressBookService;
@@ -29,10 +30,10 @@ public partial class ContactEditViewModel : ObservableObject, IQueryAttributable
     [ObservableProperty]
     private ContactModel _contactModel;
 
-    public void ApplyQueryAttributes(IDictionary<string, object> query)
-    {
-        ContactModel = (query["ContactModel"] as ContactModel)!;
-    }
+    //public void ApplyQueryAttributes(IDictionary<string, object> query)
+    //{
+    //    ContactModel = (query["ContactModel"] as ContactModel)!;
+    //}
 
     [RelayCommand]
     public async Task BackToHome()
@@ -57,7 +58,7 @@ public partial class ContactEditViewModel : ObservableObject, IQueryAttributable
 
 
     [RelayCommand]
-    private async Task UpdateToList(ContactModel contactModel)
+    private async Task UpdateToList(IContact contactModel)
     {
 
 

@@ -1,17 +1,19 @@
 ﻿using AddressBook.Shared.Interfaces;
 using AddressBook.Shared.Models;
 using AddressBook.Shared.Models.Responses;
-using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
 
 namespace AddressBook.Shared.Services;
 
-public class AddressBookService 
+public class AddressBookService : IAddressBookService
 {
     private readonly IFileService _fileService = new FileService(@"C:\CSharp\AddressBook\AddressBook.MAUI\ContactList.json");
-    private  List<IContact> _contacts = [];
+    private List<IContact> _contacts = [];
+    public EventHandler? UpdateContactList;
+  
+
     IServiceResult result = new ServiceResult();
 
     public IServiceResult AddContactToList(IContact contactModel)
@@ -21,10 +23,10 @@ public class AddressBookService
             if (!_contacts.Any(x => x.Email == contactModel.Email))
             {
                 _contacts.Add(contactModel);
-                //_fileService.AddContactToFile(JsonConvert.SerializeObject(_contacts));
+               
                 _fileService.AddContactToFile(JsonConvert.SerializeObject(_contacts, new JsonSerializerSettings
                 {
-                    TypeNameHandling = TypeNameHandling.Objects,
+                    TypeNameHandling = TypeNameHandling.All
                 }));
                 result.Status = Enums.ResultStatus.Successed;
             }
@@ -38,6 +40,8 @@ public class AddressBookService
             Debug.WriteLine(ex.Message);
             result.Status = Enums.ResultStatus.Failed;
         }
+
+        UpdateContactList?.Invoke(this, EventArgs.Empty);
         return result;
     }
 
@@ -48,27 +52,29 @@ public class AddressBookService
             var content = _fileService.GetContactFromFile();
             if (!string.IsNullOrEmpty(content))
             {
-                //_contacts = JsonConvert.DeserializeObject<List<ContactModel>>(content)!;    
-
                 _contacts = JsonConvert.DeserializeObject<List<IContact>>(content, new JsonSerializerSettings
                 {
-                    TypeNameHandling = TypeNameHandling.Objects,
+                    TypeNameHandling = TypeNameHandling.All
                 })!;
             }
+            _contacts = _contacts.OrderBy(contact => $"{contact.FirstName} {contact.LastName}").ToList();
+
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
         }
+
         return _contacts;
     }
 
-    public IServiceResult UpdateContactToList (IContact contactModel)
+    public IServiceResult UpdateContactToList(IContact contactModel)
     {
         try
         {
-            _contacts.Remove(contactModel);
+            //_contacts.Remove(contactModel);
             _fileService.UpDateContactInFile(contactModel);
+     
             result.Status = Enums.ResultStatus.Updated;
         }
         catch (Exception ex)
@@ -76,16 +82,18 @@ public class AddressBookService
             Debug.WriteLine(ex.Message);
             result.Status = Enums.ResultStatus.Failed;
         }
-        return result;
 
+        UpdateContactList?.Invoke(this, EventArgs.Empty);
+        return result;
     }
 
-    public IServiceResult DeleteContactFromList(IContact contact)
+    public IServiceResult DeleteContactFromList(IContact contactModel)
     {
         try
         {
-            _contacts.Remove(contact);
-            _fileService.DeleteContactFromFile(contact);
+            _contacts.Remove(contactModel);
+          
+            _fileService.DeleteContactFromFile(contactModel);
             result.Status = Enums.ResultStatus.Deleted;
         }
         catch (Exception ex)
@@ -93,8 +101,8 @@ public class AddressBookService
             Debug.WriteLine(ex.Message);
             result.Status = Enums.ResultStatus.Failed;
         }
+
+        UpdateContactList?.Invoke(this, EventArgs.Empty);
         return result;
     }
-
-   
 }
