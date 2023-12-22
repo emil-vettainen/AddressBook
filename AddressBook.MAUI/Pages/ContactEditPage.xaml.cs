@@ -10,5 +10,4 @@ public partial class ContactEditPage : ContentPage
 		BindingContext = contactEditViewModel;
 	}
 
-    
 }

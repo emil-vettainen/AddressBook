@@ -7,23 +7,51 @@
              xmlns:viewmodels="clr-namespace:AddressBook.MAUI.ViewModels"
              x:DataType="{x:Type viewmodels:ContactListViewModel}"
              
-             xmlns:services="clr-namespace:AddressBook.MAUI.Services"
+         
              xmlns:img="clr-namespace:System.Resources;assembly=System.Resources.ResourceManager"
              
-             Title="My Contacts" >
+             Title="My Contacts">
+
+    <ContentPage.Resources>
+        <x:String x:Key="user">&#xf007;</x:String>
+        <x:String x:Key="adduser">&#xf234;</x:String>
+        <x:String x:Key="sad">&#xf5b3;</x:String>
+    </ContentPage.Resources>
 
 
     <ContentPage.ToolbarItems >
-        <ToolbarItem Text="Add Contacts" Command="{Binding NavigateToAddContactCommand}"  />
+        <ToolbarItem Text="Add Contacts" Command="{Binding NavigateToAddContactCommand}" >
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FAS" Glyph="{StaticResource adduser}" Color="#9880e5"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
+
+    
 
 
     <CollectionView ItemsSource="{Binding ContactList  }" Margin="20,20">
+
         <CollectionView.EmptyView>
-            <StackLayout>
-                <Label Text="Du har inga kontaker, tryck på lägg till för att skapa din första kontakt!" />
-            </StackLayout>
+
+            
+            <VerticalStackLayout >
+                <Image  HeightRequest="40" WidthRequest="40" VerticalOptions="Center" Margin="0,20,0,0" >
+                    <Image.Source >
+                        <FontImageSource FontFamily="FAS" Glyph="{StaticResource sad}" Color="Silver"/>
+                    </Image.Source>
+                </Image>
+                <Label Text="Du har inga kontaker!" HorizontalTextAlignment="Center" Margin="0,20,0,10" FontSize="18"/>
+                <Label Text="Tryck på lägg till för att skapa din första kontakt!" HorizontalTextAlignment="Center" FontSize="18" />
+            </VerticalStackLayout>
+            
+           
+            
+
         </CollectionView.EmptyView>
+
+
+
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:ContactModel">
                 <Grid ColumnDefinitions="*" ColumnSpacing="20" >
@@ -32,14 +60,17 @@
                             <TapGestureRecognizer CommandParameter="{Binding .}" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ContactListViewModel}}, Path=GoToDetailsPageCommand}" />
                         </Frame.GestureRecognizers>
                         <Grid ColumnDefinitions="30, *" ColumnSpacing="10" >
-                            <Image Grid.Column="0" Source="contact.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center" />
+                            <Image Grid.Column="0" HeightRequest="20" WidthRequest="20" VerticalOptions="Center" >
+                                <Image.Source >
+                                    <FontImageSource FontFamily="FAS" Glyph="{StaticResource user}" Color="#512BD4" />
+                                </Image.Source>
+                            </Image>
                             <HorizontalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
                                 <Label Text="{Binding FirstName }" TextColor="Black" FontSize="16" />
                                 <Label Text="{Binding LastName}" TextColor="black" FontSize="16" />
                             </HorizontalStackLayout>
                         </Grid>
                     </Frame>
-                  
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>

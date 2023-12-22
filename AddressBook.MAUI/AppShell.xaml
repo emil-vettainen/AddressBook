@@ -10,17 +10,10 @@
     Shell.FlyoutBehavior="Disabled"
     Title="AddressBook.MAUI">
 
-    <ShellContent Title="Första sidan" Route="ContactListPage" ContentTemplate="{DataTemplate pages:ContactListPage}" />
-    <ShellContent Title="Första sidan" Route="ContactEditPage" ContentTemplate="{DataTemplate pages:ContactEditPage}" />
-    <ShellContent Title="Första sidan" Route="ContactDetailsPage" ContentTemplate="{DataTemplate pages:ContactDetailsPage}" />
-    <ShellContent Title="Första sidan" Route="AddContactPage" ContentTemplate="{DataTemplate pages:AddContactPage}" />
+    <ShellContent Title="Contact List" Route="ContactListPage" ContentTemplate="{DataTemplate pages:ContactListPage}" />
+    <ShellContent Title="Edit Contact" Route="ContactEditPage" ContentTemplate="{DataTemplate pages:ContactEditPage}" />
+    <ShellContent Title="Contact Details" Route="ContactDetailsPage" ContentTemplate="{DataTemplate pages:ContactDetailsPage}" />
+    <ShellContent Title="Add Contact" Route="AddContactPage" ContentTemplate="{DataTemplate pages:AddContactPage}" />
 
-
-
-
-    <!--<ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />-->
 
 </Shell>

@@ -26,10 +26,29 @@ public class AddressBookService_Tests
         Assert.Equal(ResultStatus.Successed, serviceResult.Status);
     }
 
-   
+
+    [Fact]
+    public void RemoveContactFromList_Should_RemoveOneContactFromContactsList_ReturnServiceResult()
+    {
+        // Arrange
+        AddressBookService addressBookService = new AddressBookService();
+        IServiceResult serviceResult = new ServiceResult();
+        IContact contactModel = new ContactModel { FirstName = "Emil", LastName = "Vettainen", Email = "emil@domain.com" };
+
+        // Act
+
+        serviceResult = addressBookService.DeleteContactFromList(contactModel);
+
+        // Assert
+
+        Assert.NotNull(serviceResult);
+        Assert.Equal(ResultStatus.Deleted, serviceResult.Status);
+    }
 
 
-       
+
+
+
 
 }
 

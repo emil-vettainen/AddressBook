@@ -57,6 +57,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\Font-Awesome-Solid-900.otf" />
 	  <None Remove="Resources\Images\add_user.png" />
 	  <None Remove="Resources\Images\contact.png" />
 	</ItemGroup>

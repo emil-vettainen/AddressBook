@@ -1,6 +1,4 @@
-
 using AddressBook.MAUI.ViewModels;
-
 
 namespace AddressBook.MAUI.Pages;
 
@@ -10,10 +8,5 @@ public partial class ContactListPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = contactListViewModel;
-
-       
     }
-
-
-
 }
