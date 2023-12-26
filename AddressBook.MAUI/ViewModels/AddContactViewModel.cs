@@ -6,15 +6,9 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace AddressBook.MAUI.ViewModels;
 
-public partial class AddContactViewModel : ObservableObject
+public partial class AddContactViewModel(AddressBookService addressBookService) : ObservableObject
 {
-    private readonly AddressBookService _addressBookService;
-
-    public AddContactViewModel(AddressBookService addressBookService)
-    {
-        _addressBookService = addressBookService;
-    }
-
+    private readonly AddressBookService _addressBookService = addressBookService;
 
     [ObservableProperty]
     private ContactModel _contactModel = new();
@@ -30,27 +24,25 @@ public partial class AddContactViewModel : ObservableObject
             switch (result.Status)
             {
                 case Shared.Enums.ResultStatus.Successed:
-
                     ContactModel = new();
-                
                     Shell.Current.GoToAsync("..");
-
-
                     break;
 
                 case Shared.Enums.ResultStatus.AlreadyExist:
 
-                    Shell.Current.DisplayAlert("Kontakten finns redan", "", "Ok");
+                    Shell.Current.DisplayAlert("Something went wrong!", "The contact already exists", "Ok");
+                    ContactModel = new();
                     break;
 
                 default:
-                    
+                    Shell.Current.DisplayAlert("Something went wrong!", "Please try again", "Ok");
+                    ContactModel = new();
                     break;
             }
         }
         else
         {
-            Shell.Current.DisplayAlert("Email måste anges!", "", "Ok");
+            Shell.Current.DisplayAlert("Something went wrong!", "Firstname is required. \nEmail is required.", "Ok");
         }
     }
 }

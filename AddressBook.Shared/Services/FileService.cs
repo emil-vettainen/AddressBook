@@ -1,5 +1,4 @@
 ﻿using AddressBook.Shared.Interfaces;
-using AddressBook.Shared.Models;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
@@ -39,7 +38,6 @@ internal class FileService(string filePath) : IFileService
                     return sr.ReadToEnd();
                 }
             }
-
         }
         catch (Exception ex)
         {
@@ -65,7 +63,6 @@ internal class FileService(string filePath) : IFileService
 
                 if (contactToUpdate != null)
                 {
-                    // Uppdatera kontaktens egenskaper med de nya värdena
                     contactToUpdate.FirstName = contact.FirstName;
                     contactToUpdate.LastName = contact.LastName;
                     contactToUpdate.PhoneNumber = contact.PhoneNumber;
@@ -73,11 +70,7 @@ internal class FileService(string filePath) : IFileService
                     contactToUpdate.StreetName = contact.StreetName;
                     contactToUpdate.PostalCode = contact.PostalCode;
                     contactToUpdate.PostTown = contact.PostTown;
-                    
 
-                    // Uppdatera andra egenskaper enligt behov
-
-                    // Spara uppdaterad kontaktlista till filen
                     AddContactToFile(JsonConvert.SerializeObject(existingContacts, new JsonSerializerSettings
                     {
                         TypeNameHandling = TypeNameHandling.All
@@ -85,24 +78,12 @@ internal class FileService(string filePath) : IFileService
 
                     return true;
                 }
-
-                //if (contactToUpdate != null)
-                //{
-                //    // Kopiera egenskaperna från den nya kontakten till den befintliga kontakten
-                //    JsonConvert.PopulateObject(JsonConvert.SerializeObject(contact), contactToUpdate);
-
-                //    // Spara uppdaterad kontaktlista till filen
-                //    AddContactToFile(JsonConvert.SerializeObject(existingContacts));
-
-                //    return true;
-                //}
             }
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
         }
-
         return false;
     }
 
@@ -136,6 +117,5 @@ internal class FileService(string filePath) : IFileService
             Debug.WriteLine(ex.Message);
             return false;
         }
-        
     }
 }

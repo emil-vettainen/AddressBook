@@ -5,7 +5,7 @@ namespace AddressBook.Shared.Interfaces;
 public interface IServiceResult
 {
     /// <summary>
-    /// Gets or sets the result of an operation.
+    /// Gets/sets the result of an operation.
     /// </summary>
     object Result { get; set; }
 

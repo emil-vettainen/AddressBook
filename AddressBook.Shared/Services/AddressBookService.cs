@@ -1,5 +1,4 @@
 ﻿using AddressBook.Shared.Interfaces;
-using AddressBook.Shared.Models;
 using AddressBook.Shared.Models.Responses;
 using Newtonsoft.Json;
 using System.Diagnostics;
@@ -12,7 +11,7 @@ public class AddressBookService : IAddressBookService
     private readonly IFileService _fileService = new FileService(@"C:\CSharp\AddressBook\AddressBook.MAUI\ContactList.json");
     private List<IContact> _contacts = [];
     public EventHandler? UpdateContactList;
-  
+
 
     IServiceResult result = new ServiceResult();
 
@@ -23,7 +22,7 @@ public class AddressBookService : IAddressBookService
             if (!_contacts.Any(x => x.Email == contactModel.Email))
             {
                 _contacts.Add(contactModel);
-               
+
                 _fileService.AddContactToFile(JsonConvert.SerializeObject(_contacts, new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.All
@@ -72,9 +71,8 @@ public class AddressBookService : IAddressBookService
     {
         try
         {
-            //_contacts.Remove(contactModel);
             _fileService.UpDateContactInFile(contactModel);
-     
+
             result.Status = Enums.ResultStatus.Updated;
         }
         catch (Exception ex)
@@ -92,7 +90,7 @@ public class AddressBookService : IAddressBookService
         try
         {
             _contacts.Remove(contactModel);
-          
+
             _fileService.DeleteContactFromFile(contactModel);
             result.Status = Enums.ResultStatus.Deleted;
         }

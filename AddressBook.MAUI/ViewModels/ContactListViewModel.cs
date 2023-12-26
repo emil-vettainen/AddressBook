@@ -17,7 +17,7 @@ public partial class ContactListViewModel : ObservableObject
         _addressBookService = addressBookService;
         UpdateList();
 
-        _addressBookService.UpdateContactList += (sender, e) => 
+        _addressBookService.UpdateContactList += (sender, e) =>
         {
             UpdateList();
         };

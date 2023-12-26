@@ -9,16 +9,9 @@ namespace AddressBook.MAUI.ViewModels
 {
     [QueryProperty(nameof(ContactModel), nameof(ContactModel))]
 
-    public partial class ContactDetailsViewModel : ObservableObject
+    public partial class ContactDetailsViewModel(AddressBookService addressBookService) : ObservableObject
     {
-        private readonly AddressBookService _addressBookService;
-
-        public ContactDetailsViewModel(AddressBookService addressBookService)
-        {
-            _addressBookService = addressBookService;
-     
-        }
-
+        private readonly AddressBookService _addressBookService = addressBookService;
 
         [ObservableProperty]
         private ContactModel _contactModel = new();
@@ -43,7 +36,7 @@ namespace AddressBook.MAUI.ViewModels
 
 
         [RelayCommand]
-        private async Task UpdateToList(ContactModel contactModel)
+        public async Task UpdateToList(ContactModel contactModel)
         {
             var result = _addressBookService.UpdateContactToList(contactModel);
 
@@ -56,35 +49,33 @@ namespace AddressBook.MAUI.ViewModels
                     break;
 
                 default:
+                    await Shell.Current.DisplayAlert("Something went wrong!", "Please try again", "Ok");
                     break;
             }
         }
 
         [RelayCommand]
-        private async Task RemoveFromList(IContact contactModel)
+        public async Task RemoveFromList(IContact contactModel)
         {
-            var result = _addressBookService.DeleteContactFromList(contactModel);
+            var result = await Shell.Current.DisplayAlert("Warning!", "Are you sure you want to delete the contact?\nThis action cannot be undone.", "Ok", "Cancel");
 
-            switch (result.Status)
+            if(result)
             {
-                case Shared.Enums.ResultStatus.Deleted:
+                var response = _addressBookService.DeleteContactFromList(contactModel);
 
-                    await Shell.Current.GoToAsync("//ContactListPage");
+                switch (response.Status)
+                {
+                    case Shared.Enums.ResultStatus.Deleted:
 
-                    break;
+                        await Shell.Current.GoToAsync("//ContactListPage");
 
-                case Shared.Enums.ResultStatus.Failed:
+                        break;
 
-
-                    break;
-
-                default:
-
-                    break;
+                    default:
+                        await Shell.Current.DisplayAlert("Something went wrong!", "Please try again", "Ok");
+                        break;
+                }
             }
         }
     }
 }
-
-
-   

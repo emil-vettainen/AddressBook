@@ -60,6 +60,7 @@
 	  <None Remove="Resources\Fonts\Font-Awesome-Solid-900.otf" />
 	  <None Remove="Resources\Images\add_user.png" />
 	  <None Remove="Resources\Images\contact.png" />
+	  <None Remove="Resources\Images\sad.png" />
 	</ItemGroup>
 
 	<ItemGroup>

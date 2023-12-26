@@ -8,15 +8,9 @@ using CommunityToolkit.Mvvm.Input;
 namespace AddressBook.MAUI.ViewModels;
 
 [QueryProperty(nameof(ContactModel), nameof(ContactModel))]
-public partial class ContactEditViewModel : ObservableObject
+public partial class ContactEditViewModel(AddressBookService addressBookService) : ObservableObject
 {
-    private readonly AddressBookService _addressBookService;
-
-    public ContactEditViewModel(AddressBookService addressBookService)
-    {
-        _addressBookService = addressBookService;
-    }
-
+    private readonly AddressBookService _addressBookService = addressBookService;
 
     [ObservableProperty]
     private ContactModel _contactModel = new();

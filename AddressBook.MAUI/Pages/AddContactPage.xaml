@@ -10,54 +10,33 @@
              Title="Add your contact">
 
 
-    <!--<ContentPage.ToolbarItems >
-        <ToolbarItem Text="Save" Command="{Binding AddContactCommand}"  />
-    </ContentPage.ToolbarItems>-->
 
-   
-    
-    
     <ScrollView >
-
         <StackLayout Grid.Column="0" Margin="20,20" Spacing="5" >
 
-            <Label  Text="Förnamn:" Margin="0,0,0,5"  FontSize="16"/>
-
+            <Label  Text="Firstname:" Margin="0,0,0,5"  FontSize="16"/>
             <Entry Text="{Binding ContactModel.FirstName }" FontSize="16" />
 
-            <Label  Text="Efternamn:" Margin="0,5,0,5"  FontSize="16" />
-
+            <Label  Text="Lastname:" Margin="0,5,0,5"  FontSize="16" />
             <Entry  Text="{Binding ContactModel.LastName}"   FontSize="16" />
 
-            <Label  Text="Telefonnummer:" Margin="0,5,0,5"  FontSize="16"/>
-
+            <Label  Text="Phonenumber:" Margin="0,5,0,5"  FontSize="16"/>
             <Entry  Text="{Binding ContactModel.PhoneNumber}"   FontSize="16" />
 
             <Label  Text="Email:" Margin="0,5,0,5"  FontSize="16"/>
-
             <Entry  Text="{Binding ContactModel.Email}"   FontSize="16" />
 
-            <Label  Text="Gatuadress:" Margin="0,5,0,5"  FontSize="16"/>
-
+            <Label  Text="Streetname:" Margin="0,5,0,5"  FontSize="16"/>
             <Entry  Text="{Binding ContactModel.StreetName}"   FontSize="16" />
-            
-            <Label  Text="Postnummer:" Margin="0,5,0,5"  FontSize="16"/>
 
+            <Label  Text="Postalcode:" Margin="0,5,0,5"  FontSize="16"/>
             <Entry  Text="{Binding ContactModel.PostalCode}"   FontSize="16" />
-            
-            <Label  Text="Ort:" Margin="0,5,0,5"  FontSize="16"/>
 
+            <Label  Text="Posttown:" Margin="0,5,0,5"  FontSize="16"/>
             <Entry  Text="{Binding ContactModel.PostTown}"   FontSize="16" />
 
             <Button Command="{Binding AddContactCommand}" Text="Add" Margin="0,30,0,0" Background="#66B66D" FontSize="18" />
 
-
         </StackLayout>
-
-
     </ScrollView>
-
-   
-
-
 </ContentPage>

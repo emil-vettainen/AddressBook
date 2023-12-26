@@ -1,6 +1,4 @@
-﻿using AddressBook.Shared.Models;
-
-namespace AddressBook.Shared.Interfaces;
+﻿namespace AddressBook.Shared.Interfaces;
 
 public interface IFileService
 {

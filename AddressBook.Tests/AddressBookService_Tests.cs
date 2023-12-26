@@ -13,17 +13,29 @@ public class AddressBookService_Tests
     {
         // Arrange
         AddressBookService addressBookService = new AddressBookService();
-        IServiceResult serviceResult = new ServiceResult();
+        IServiceResult _serviceResult = new ServiceResult();
         IContact contactModel = new ContactModel { FirstName = "Emil", LastName = "Vettainen", Email = "emil@domain.com" };
 
         // Act
 
-        serviceResult = addressBookService.AddContactToList(contactModel);
+        _serviceResult = addressBookService.AddContactToList(contactModel);
 
         // Assert
 
-        Assert.NotNull(serviceResult);
-        Assert.Equal(ResultStatus.Successed, serviceResult.Status);
+        Assert.NotNull(_serviceResult);
+        Assert.Equal(ResultStatus.Successed, _serviceResult.Status);
+    }
+
+
+    [Fact]
+    public void GetContactFromList_Should_GetAllContactsInList_ReturnContacts()
+    {
+        // Arrange
+        AddressBookService addressBookService = new AddressBookService();
+
+        // Act
+
+        // Assert
     }
 
 
@@ -32,23 +44,34 @@ public class AddressBookService_Tests
     {
         // Arrange
         AddressBookService addressBookService = new AddressBookService();
-        IServiceResult serviceResult = new ServiceResult();
+        IServiceResult _serviceResult = new ServiceResult();
         IContact contactModel = new ContactModel { FirstName = "Emil", LastName = "Vettainen", Email = "emil@domain.com" };
 
         // Act
 
-        serviceResult = addressBookService.DeleteContactFromList(contactModel);
+        _serviceResult = addressBookService.DeleteContactFromList(contactModel);
 
         // Assert
 
-        Assert.NotNull(serviceResult);
-        Assert.Equal(ResultStatus.Deleted, serviceResult.Status);
+        Assert.NotNull(_serviceResult);
+        Assert.Equal(ResultStatus.Deleted, _serviceResult.Status);
     }
 
+    [Fact]
+    public void UpdateContactToList_Should_UpdateTargetContactToContactsList_ReturnServiceResult()
+    {
+        // Arrange
+        AddressBookService addressBookService = new AddressBookService();
+        IServiceResult _serviceResult = new ServiceResult();
+        IContact contactModel = new ContactModel { FirstName = "Emil", LastName = "Vettainen", Email = "emil@domain.com" };
 
+        // Act
 
+        _serviceResult = addressBookService.UpdateContactToList(contactModel);
 
+        // Assert
 
-
+        Assert.NotNull(_serviceResult);
+        Assert.Equal(ResultStatus.Updated, _serviceResult.Status);
+    }
 }
-

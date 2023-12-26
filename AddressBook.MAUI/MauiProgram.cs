@@ -1,11 +1,8 @@
 ﻿using AddressBook.MAUI.Pages;
 using AddressBook.MAUI.ViewModels;
-using AddressBook.Shared.Interfaces;
-using AddressBook.Shared.Models;
 using AddressBook.Shared.Services;
-using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
-using System.Collections.ObjectModel;
+
 
 namespace AddressBook.MAUI
 {
@@ -23,11 +20,7 @@ namespace AddressBook.MAUI
                     fonts.AddFont("Font-Awesome-Solid-900.OTF", "FAS");
                 });
 
-           
 
-        
-
- 
             builder.Services.AddSingleton<AddressBookService>();
             
             builder.Services.AddSingleton<AddContactViewModel>();
@@ -44,8 +37,6 @@ namespace AddressBook.MAUI
 
 
             builder.Logging.AddDebug();
-
-
             return builder.Build();
         }
     }

@@ -5,9 +5,9 @@
              Title="Edit"
              
              
-                         xmlns:models="clr-namespace:AddressBook.Shared.Models;assembly=AddressBook.Shared"
-   xmlns:viewmodels="clr-namespace:AddressBook.MAUI.ViewModels"
-   x:DataType="{x:Type viewmodels:ContactEditViewModel}">
+             xmlns:models="clr-namespace:AddressBook.Shared.Models;assembly=AddressBook.Shared"
+             xmlns:viewmodels="clr-namespace:AddressBook.MAUI.ViewModels"
+             x:DataType="{x:Type viewmodels:ContactEditViewModel}">
              
              
              
@@ -17,29 +17,28 @@
 
 
     <Grid RowDefinitions="auto,auto"   RowSpacing="10" ColumnSpacing="10" Margin="20">
-
         <StackLayout Grid.Row="0" >
             <Grid RowDefinitions="auto,auto,auto,auto,auto,auto, auto" ColumnDefinitions="auto,*" ColumnSpacing="10" RowSpacing="10">
 
-                <Label Grid.Column="0" Text="Förnamn:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
+                <Label Grid.Column="0" Text="Firstname:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
                 <Entry Grid.Column="1" Text="{Binding ContactModel.FirstName}" FontSize="16" />
 
-                <Label Grid.Column="0" Grid.Row="1" Text="Efternamn:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
+                <Label Grid.Column="0" Grid.Row="1" Text="Lastname:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
                 <Entry Grid.Column="1" Grid.Row="1" Text="{Binding ContactModel.LastName}" FontSize="16" />
 
-                <Label Grid.Column="0" Grid.Row="2" Text="Telefonnummer:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
+                <Label Grid.Column="0" Grid.Row="2" Text="Phonenumber:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
                 <Entry Grid.Column="1" Grid.Row="2" Text="{Binding ContactModel.PhoneNumber}" FontSize="16" />
 
                 <Label Grid.Column="0" Grid.Row="3" Text="Email:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
                 <Entry Grid.Column="1" Grid.Row="3" Text="{Binding ContactModel.Email}" FontSize="16" />
 
-                <Label Grid.Column="0" Grid.Row="4" Text="Gatuadress:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
+                <Label Grid.Column="0" Grid.Row="4" Text="Streetname:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
                 <Entry Grid.Column="1" Grid.Row="4" Text="{Binding ContactModel.StreetName}" FontSize="16" />
 
-                <Label Grid.Column="0" Grid.Row="5" Text="Postnummer:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
+                <Label Grid.Column="0" Grid.Row="5" Text="Postalcode:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
                 <Entry Grid.Column="1" Grid.Row="5" Text="{Binding ContactModel.PostalCode}" FontSize="16" />
 
-                <Label Grid.Column="0" Grid.Row="6" Text="Ort:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
+                <Label Grid.Column="0" Grid.Row="6" Text="Posttown:" Margin="0,0,0,0" VerticalOptions="Center" FontSize="16" />
                 <Entry Grid.Column="1" Grid.Row="6" Text="{Binding ContactModel.PostTown}" FontSize="16" />
 
             </Grid>
@@ -49,11 +48,4 @@
             <Button  FontSize="18"  Grid.Column="1" Text="Cancel" Command="{Binding BackToHomeCommand}"/>
         </VerticalStackLayout>
     </Grid>
-
-    
-
-
-
-
-
 </ContentPage>
