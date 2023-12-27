@@ -37,6 +37,59 @@ public class FileService_Tests
         Assert.Null(result);
     }
 
+
+    [Fact]
+    public void UpDateContactInFile_ShouldUpdateContact_IfExists()
+    {
+        // Arrange
+        FileService fileService = new FileService();
+        var filePath = Path.GetTempFileName();
+        var originalContact = new ContactModel
+        {
+            Id = Guid.NewGuid(),
+            FirstName = "Emil",
+            LastName = "Vettainen",
+            PhoneNumber = "1234567890",
+            Email = "emil@domain.com",
+            StreetName = "Skara",
+            PostalCode = "12345",   
+            PostTown = "Skara"
+        };
+        var existingContacts = new List<IContact> { originalContact };
+        var content = JsonConvert.SerializeObject(existingContacts, new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.All
+        });
+        File.WriteAllText(filePath, content);
+        var updatedContact = new ContactModel
+        {
+            Id = originalContact.Id,
+            FirstName = "Test",
+            LastName = "Updated",
+            PhoneNumber = "1234567890",
+            Email = "annan@domain.com",
+            StreetName = "Skara",
+            PostalCode = "12345",
+            PostTown = "Skara"
+        };
+
+        // Act
+        var result = fileService.UpDateContactInFile(filePath, updatedContact);
+
+        // Assert
+        Assert.True(result);
+        var updatedContent = File.ReadAllText(filePath);
+        var updatedContacts = JsonConvert.DeserializeObject<List<ContactModel>>(updatedContent);
+        Assert.NotNull(updatedContacts);
+        var contactInFile = updatedContacts.Find(c => c.Id == originalContact.Id);
+        Assert.NotNull(contactInFile);
+        Assert.Equal("annan@domain.com", contactInFile.Email);
+        Assert.Equal("Test", contactInFile.FirstName);
+        File.Delete(filePath);
+    }
+
+
+
     [Fact]
     public void DeleteContactFromFile_ShouldNotRemoveContact_IfEmailDoesNotExist()
     {

@@ -13,10 +13,12 @@ public class AddressBookService : IAddressBookService
     public AddressBookService(IFileService fileService)
     {
         _fileService = fileService;
+        
+        
     }
 
-
     private readonly string _filePath = (@"C:\CSharp\AddressBook\ContactsList.json");
+
 
     private List<IContact> _contacts = [];
     public EventHandler? UpdateContactList;

@@ -34,7 +34,7 @@ public class AddressBookService_Tests
         // Assert
         Assert.NotNull(_serviceResult);
         Assert.Equal(ResultStatus.Successed, _serviceResult.Status);
-        fileServiceMock.Verify(fs => fs.AddContactToFile(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        fileServiceMock.Verify(x => x.AddContactToFile(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
     }
 
     [Fact]
@@ -56,7 +56,7 @@ public class AddressBookService_Tests
         {
             TypeNameHandling = TypeNameHandling.All,
         });
-        fileServiceMock.Setup(fs => fs.GetContactFromFile(It.IsAny<string>())).Returns(serializedContacts);
+        fileServiceMock.Setup(x => x.GetContactFromFile(It.IsAny<string>())).Returns(serializedContacts);
         var addressBookService = new AddressBookService(fileServiceMock.Object);
 
         // Act
@@ -88,7 +88,7 @@ public class AddressBookService_Tests
             PostalCode = "12345",
             PostTown = "Skara"
         };
-        fileServiceMock.Setup(fs => fs.UpDateContactInFile(It.IsAny<string>(), It.IsAny<IContact>())).Returns(true);
+        fileServiceMock.Setup(x => x.UpDateContactInFile(It.IsAny<string>(), It.IsAny<IContact>())).Returns(true);
 
         // Act
         addressBookService.AddContactToList(originalContact);
@@ -107,7 +107,7 @@ public class AddressBookService_Tests
         // Assert
         Assert.NotNull(serviceResult);
         Assert.Equal(ResultStatus.Updated, serviceResult.Status);
-        fileServiceMock.Verify(fs => fs.UpDateContactInFile(It.IsAny<string>(), updatedContact), Times.Once);
+        fileServiceMock.Verify(x => x.UpDateContactInFile(It.IsAny<string>(), updatedContact), Times.Once);
     }
 
     [Fact]
@@ -126,7 +126,7 @@ public class AddressBookService_Tests
             PostalCode = "12345",
             PostTown = "Skara"
         };
-        fileServiceMock.Setup(fs => fs.DeleteContactFromFile(It.IsAny<string>(), It.IsAny<IContact>())).Returns(true);
+        fileServiceMock.Setup(x => x.DeleteContactFromFile(It.IsAny<string>(), It.IsAny<IContact>())).Returns(true);
 
         // Act
         addressBookService.AddContactToList(contactModel);
@@ -135,6 +135,6 @@ public class AddressBookService_Tests
         // Assert
         Assert.NotNull(serviceResult);
         Assert.Equal(ResultStatus.Deleted, serviceResult.Status);
-        fileServiceMock.Verify(fs => fs.DeleteContactFromFile(It.IsAny<string>(), contactModel), Times.Once);
+        fileServiceMock.Verify(x => x.DeleteContactFromFile(It.IsAny<string>(), contactModel), Times.Once);
     }
 }
