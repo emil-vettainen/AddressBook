@@ -2,7 +2,6 @@
 {
     public interface IAddressBookService
     {
-
         /// <summary>
         /// Adds a contact, handling duplicate emails, saving it to a file and notifying update through the UpdateContactList event.
         /// </summary>
@@ -35,6 +34,5 @@
         ///   An <see cref="IServiceResult"/> indicating the result of the operation.
         /// </returns>
         IServiceResult UpdateContactToList(IContact contactModel);
-
     }
 }

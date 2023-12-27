@@ -34,7 +34,7 @@ public partial class ContactListViewModel : ObservableObject
 
 
     [ObservableProperty]
-    private ContactModel _contactModel = new ContactModel();
+    private ContactModel _contactModel = new();
 
 
     [RelayCommand]

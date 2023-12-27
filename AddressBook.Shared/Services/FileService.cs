@@ -5,15 +5,13 @@ using System.Diagnostics;
 
 namespace AddressBook.Shared.Services;
 
-internal class FileService(string filePath) : IFileService
+public class FileService: IFileService
 {
-    private readonly string _filePath = filePath;
-
-    public bool AddContactToFile(string contact)
+    public bool AddContactToFile(string filePath, string contact)
     {
         try
         {
-            using (var sw = new StreamWriter(_filePath))
+            using (var sw = new StreamWriter(filePath))
             {
                 sw.WriteLine(contact); 
             }
@@ -26,14 +24,13 @@ internal class FileService(string filePath) : IFileService
         return false;
     }
 
-
-    public string GetContactFromFile()
+    public string GetContactFromFile(string filePath)
     {
         try
         {
-            if (File.Exists(_filePath))
+            if (File.Exists(filePath))
             {
-                using (var sr = new StreamReader(_filePath))
+                using (var sr = new StreamReader(filePath))
                 {
                     return sr.ReadToEnd();
                 }
@@ -47,19 +44,19 @@ internal class FileService(string filePath) : IFileService
     }
 
 
-    public bool UpDateContactInFile(IContact contact)
+    public bool UpDateContactInFile(string filePath, IContact contact)
     {
         try
         {
-            if (File.Exists(_filePath))
+            if (File.Exists(filePath))
             {
-                var existingContent = GetContactFromFile();
+                var existingContent = GetContactFromFile(filePath);
                 var existingContacts = JsonConvert.DeserializeObject<List<IContact>>(existingContent, new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.All
                 })!;
 
-                var contactToUpdate = existingContacts.FirstOrDefault(x => x.Email == contact.Email);
+                var contactToUpdate = existingContacts.FirstOrDefault(x => x.Id == contact.Id);
 
                 if (contactToUpdate != null)
                 {
@@ -70,8 +67,8 @@ internal class FileService(string filePath) : IFileService
                     contactToUpdate.StreetName = contact.StreetName;
                     contactToUpdate.PostalCode = contact.PostalCode;
                     contactToUpdate.PostTown = contact.PostTown;
-
-                    AddContactToFile(JsonConvert.SerializeObject(existingContacts, new JsonSerializerSettings
+               
+                    AddContactToFile(filePath, JsonConvert.SerializeObject(existingContacts, new JsonSerializerSettings
                     {
                         TypeNameHandling = TypeNameHandling.All
                     }));
@@ -84,17 +81,17 @@ internal class FileService(string filePath) : IFileService
         {
             Debug.WriteLine(ex.Message);
         }
+
         return false;
     }
 
-
-    public bool DeleteContactFromFile(IContact contactModel)
+    public bool DeleteContactFromFile(string filePath, IContact contactModel)
     {
         try
         {
-            if (File.Exists(_filePath)) 
+            if (File.Exists(filePath)) 
             {
-                var existingContent = GetContactFromFile();
+                var existingContent = GetContactFromFile(filePath);
                 var existingContacts = JsonConvert.DeserializeObject<List<IContact>>(existingContent, new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.All
@@ -104,7 +101,7 @@ internal class FileService(string filePath) : IFileService
                 if (contactToRemove != null)
                 {
                     existingContacts.Remove(contactToRemove);
-                    AddContactToFile(JsonConvert.SerializeObject(existingContacts, new JsonSerializerSettings
+                    AddContactToFile(filePath, JsonConvert.SerializeObject(existingContacts, new JsonSerializerSettings
                     {
                         TypeNameHandling = TypeNameHandling.All
                     }));

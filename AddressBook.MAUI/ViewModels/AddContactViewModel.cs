@@ -1,4 +1,5 @@
-﻿using AddressBook.Shared.Models;
+﻿using AddressBook.Shared.Interfaces;
+using AddressBook.Shared.Models;
 using AddressBook.Shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;

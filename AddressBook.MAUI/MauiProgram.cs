@@ -1,5 +1,6 @@
 ﻿using AddressBook.MAUI.Pages;
 using AddressBook.MAUI.ViewModels;
+using AddressBook.Shared.Interfaces;
 using AddressBook.Shared.Services;
 using Microsoft.Extensions.Logging;
 
@@ -22,6 +23,8 @@ namespace AddressBook.MAUI
 
 
             builder.Services.AddSingleton<AddressBookService>();
+            builder.Services.AddSingleton<IFileService, FileService>();  
+      
             
             builder.Services.AddSingleton<AddContactViewModel>();
             builder.Services.AddSingleton<AddContactPage>();

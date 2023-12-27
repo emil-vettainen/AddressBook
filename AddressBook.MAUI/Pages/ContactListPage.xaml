@@ -35,8 +35,8 @@
                 <Image Source="sad.png"  HeightRequest="40" WidthRequest="40" VerticalOptions="Center" Margin="0,20,0,0" >
 
                 </Image>
-                <Label Text="Du har inga kontaker!" HorizontalTextAlignment="Center" Margin="0,20,0,10" FontSize="18"/>
-                <Label Text="Tryck på lägg till för att skapa din första kontakt!" HorizontalTextAlignment="Center" FontSize="18" />
+                <Label Text="You have no contacts!" HorizontalTextAlignment="Center" Margin="0,20,0,10" FontSize="18"/>
+                <Label Text="Press 'Add Contacts' to create your first contact!" HorizontalTextAlignment="Center" FontSize="18" />
             </VerticalStackLayout>
         </CollectionView.EmptyView>
 

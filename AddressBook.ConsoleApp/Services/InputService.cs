@@ -17,8 +17,9 @@ public class InputService
             }
             else
             {
-                var mainMenu = new MenuService();
-                mainMenu.PressAnyKeyToContinue();
+                Console.Clear();
+                Console.Write("Felaktig inmatning! Tryck på valfri tangent för att försöka igen...");
+                Console.ReadKey();
             }
         } while (true);
     }

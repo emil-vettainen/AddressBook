@@ -2,5 +2,5 @@
 
 public interface IContact : IPerson, IAddress, IContactDetails
 {
-
+    Guid Id { get; set; }
 }

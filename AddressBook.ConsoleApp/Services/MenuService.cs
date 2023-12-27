@@ -1,17 +1,14 @@
 ﻿using AddressBook.Shared.Interfaces;
 using AddressBook.Shared.Models;
-using AddressBook.Shared.Services;
-using System;
+
 
 namespace AddressBook.ConsoleApp.Services;
 
-internal class MenuService
+public class MenuService(IAddressBookService addressBook)
 {
-    private readonly IAddressBookService _addressBook = new AddressBookService();
-
-
-    private readonly InputService _inputService = new InputService();
-    private readonly ValidateSettings validateSettings = new ValidateSettings();
+    private readonly IAddressBookService _addressBook = addressBook;
+    private readonly InputService _inputService = new();
+   
 
     public void DisplayMainMenu()
     {
@@ -237,7 +234,6 @@ internal class MenuService
             contact.PostTown = _inputService.GetValidInput("Ange Ort: ", input => !string.IsNullOrWhiteSpace((string?)input));
            
 
-
             var result = _addressBook.AddContactToList(contact);
 
             switch (result.Status)
@@ -247,17 +243,18 @@ internal class MenuService
                     break;
 
                 case Shared.Enums.ResultStatus.AlreadyExist:
-                    //AlreadyExistWhenAdd();
-                    Console.WriteLine("finns redan;  valfri tangent ....");
+                    Console.Clear();
+                    Console.WriteLine("Kontakten finns redan, Tryck på valfri tangent för att försöka igen...");
                     Console.ReadKey();
 
                     break;
 
                 default:
-                    Console.WriteLine("Något blev fel: ");
+                    Console.Clear();
+                    Console.WriteLine("Något blev fel, Tryck på valfri tangen för att försöka igen...");
+                    Console.ReadKey();  
                     break;
             }
-
         }
     }
 

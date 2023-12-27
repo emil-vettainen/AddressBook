@@ -5,6 +5,7 @@ namespace AddressBook.Shared.Models;
 
 public class ContactModel : IContact
 {
+    public Guid Id { get; set; }
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
     public string StreetName { get; set; } = null!;
